@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar perfil — MIF</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">M<span>IF</span></a>
+    <nav>
+        <a href="vendedor.html?id=1">João Silva</a>
+        <a href="index.html">Início</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="breadcrumb">
+        <a href="index.html">Início</a>
+        <span>&rsaquo;</span>
+        <a href="vendedor.html?id=1">Meu perfil</a>
+        <span>&rsaquo;</span>
+        <span>Editar perfil</span>
+    </div>
+
+    <div class="titulo-pagina">
+        <h1>Editar perfil</h1>
+        <p>Mantenha seus dados atualizados para facilitar o contato.</p>
+    </div>
+
+    <!-- ABAS QUE CONTROLAM O IFRAME -->
+    <div class="tabs-iframe">
+        <a href="perfil-dados.html" target="perfil-iframe" class="tab-item">Dados pessoais</a>
+        <a href="perfil-seguranca.html" target="perfil-iframe" class="tab-item">Segurança</a>
+    </div>
+
+    <!-- IFRAME CENTRALIZADO -->
+    <iframe name="perfil-iframe" src="perfil-dados.html" class="iframe-container" style="height: 600px;"></iframe>
+
+</div>
+
+<footer>
+    <p>MIF &mdash; Marketplace do Instituto Federal Goiano &copy; 2025</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>João Silva — Perfil — MIF</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">M<span>IF</span></a>
+    <div class="barra-busca">
+        <input type="text" placeholder="Buscar produtos...">
+        <button type="button">Buscar</button>
+    </div>
+    <nav>
+        <a href="login.html">Entrar</a>
+        <a href="cadastro-produto.html" class="btn-anunciar">+ Anunciar</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="breadcrumb">
+        <a href="index.html">Início</a>
+        <span>&rsaquo;</span>
+        <span>Perfil do vendedor</span>
+    </div>
+
+    <div class="perfil-vendedor-topo">
+        <div class="avatar-grande">J</div>
+        <div class="dados-vendedor flex-1">
+            <h1>João Silva</h1>
+            <div class="meta">Campus Morrinhos &nbsp;&mdash;&nbsp; Técnico em Química</div>
+            <div class="mb-8">
+                <span class="estrelas">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                <span class="avaliacao-numero font-bold text-verde">4,2</span>
+                <span class="avaliacao-numero">(12 avaliações)</span>
+            </div>
+            <p class="text-small text-cinza max-w-560 mb-12">
+                Estudante de Química, 3º ano. Vendo jalecos e materiais de laboratório.
+            </p>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-numero">3</div>
+                    <div class="stat-label">Anúncios ativos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-numero">12</div>
+                    <div class="stat-label">Avaliações</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-numero text-small">03/2024</div>
+                    <div class="stat-label">Membro desde</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-column gap-10 align-end">
+            <a href="produto.html#chat" class="btn btn-verde">Enviar mensagem</a>
+            <div class="text-xsmall text-cinza text-right">WhatsApp: (64) 99999-9999</div>
+        </div>
+    </div>
+
+    <!-- ABAS QUE CONTROLAM O IFRAME -->
+    <div class="tabs-iframe">
+        <a href="vendedor-anuncios.html" target="vendedor-iframe" class="tab-item">Anúncios <span class="badge-count">3</span></a>
+        <a href="vendedor-avaliacoes.html" target="vendedor-iframe" class="tab-item">Avaliações <span class="badge-count">12</span></a>
+    </div>
+
+    <!-- IFRAME CENTRALIZADO -->
+    <iframe name="vendedor-iframe" src="vendedor-anuncios.html" class="iframe-container" style="height: 600px;"></iframe>
+
+</div>
+
+<footer>
+    <p>MIF &mdash; Marketplace do Instituto Federal Goiano &copy; 2025</p>
+</footer>
+
+</body>
+</html>

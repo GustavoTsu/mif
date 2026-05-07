@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar — MIF</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo">M<span>IF</span></a>
+    <nav>
+        <a href="index.html">Voltar ao início</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="caixa-central" style="max-width: 500px;">
+        <!-- ABAS QUE CONTROLAM O IFRAME -->
+        <div class="tabs-iframe">
+            <a href="login-form.html" target="login-iframe" class="tab-item">Entrar</a>
+            <a href="cadastro-form.html" target="login-iframe" class="tab-item">Criar conta</a>
+        </div>
+
+        <!-- IFRAME CENTRALIZADO -->
+        <iframe name="login-iframe" src="login-form.html" class="iframe-container" style="height: 450px;"></iframe>
+        
+        <p class="text-center text-small text-cinza mt-16">
+            MIF &mdash; Marketplace do Instituto Federal Goiano
+        </p>
+    </div>
+</div>
+
+<footer>
+    <p>MIF &mdash; Marketplace do Instituto Federal Goiano &copy; 2025</p>
+</footer>
+
+</body>
+</html>
