@@ -234,7 +234,7 @@ header .btn-anunciar:hover {
 }
 
 .form-grupo input[type="text"],
-.form-grupo input[type="email"],
+.form-grupo input[type="matricula"],
 .form-grupo input[type="password"],
 .form-grupo input[type="number"],
 .form-grupo input[type="file"],
