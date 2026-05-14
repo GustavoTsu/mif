@@ -20,14 +20,14 @@ USE `banco` ;
 -- -----------------------------------------------------
 -- Table `banco`.`Usuarios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `banco`.`Usuarios` (
-  `idUsuarios` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `banco`.`usuario` (
+  `idusuario` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `numero` CHAR(14) NOT NULL,
   `matricula` CHAR(16) NOT NULL,
   `admin` INT(1) NOT NULL,
-  PRIMARY KEY (`idUsuarios`))
+  PRIMARY KEY (`idusuario`))
 ENGINE = InnoDB;
 
 
@@ -55,19 +55,19 @@ CREATE TABLE IF NOT EXISTS `banco`.`anuncio` (
   `troca` VARCHAR(45) NOT NULL,
   `idcategoria` INT NOT NULL,
   `status` VARCHAR(255) NOT NULL,
-  `idusuarios` INT NOT NULL,
+  `idusuario` INT NOT NULL,
   `datahora` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idanuncio`),
   INDEX `fk_anuncio_categoria_idx` (`idcategoria` ASC) VISIBLE,
-  INDEX `fk_anuncio_Usuarios1_idx` (`idusuarios` ASC) VISIBLE,
+  INDEX `fk_anuncio_Usuarios1_idx` (`idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_anuncio_categoria`
     FOREIGN KEY (`idcategoria`)
     REFERENCES `banco`.`categoria` (`idcategoria`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_anuncio_Usuarios1`
-    FOREIGN KEY (`idusuarios`)
-    REFERENCES `banco`.`Usuarios` (`idUsuarios`)
+    FOREIGN KEY (`idusuario`)
+    REFERENCES `banco`.`Usuarios` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -94,14 +94,14 @@ ENGINE = InnoDB;
 -- Table `banco`.`favorito`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `banco`.`favorito` (
-  `idusuarios` INT NOT NULL,
+  `idusuario` INT NOT NULL,
   `idanuncio` INT NOT NULL,
-  PRIMARY KEY (`idusuarios`, `idanuncio`),
+  PRIMARY KEY (`idusuario`, `idanuncio`),
   INDEX `fk_Usuarios_has_anuncio_anuncio1_idx` (`idanuncio` ASC) VISIBLE,
-  INDEX `fk_Usuarios_has_anuncio_Usuarios1_idx` (`idusuarios` ASC) VISIBLE,
+  INDEX `fk_Usuarios_has_anuncio_Usuarios1_idx` (`idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_Usuarios_has_anuncio_Usuarios1`
-    FOREIGN KEY (`idusuarios`)
-    REFERENCES `banco`.`Usuarios` (`idUsuarios`)
+    FOREIGN KEY (`idusuario`)
+    REFERENCES `banco`.`Usuarios` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuarios_has_anuncio_anuncio1`
