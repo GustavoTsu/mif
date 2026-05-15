@@ -105,7 +105,7 @@ function editarFavorito($conexao, $idusuario, $idanuncio) {
 };
 
 function deletarAnuncio($conexao, $idanuncio) {
-    $sql = "DELETE FROM favorito WHERE idanuncio = ?";
+    $sql = "DELETE FROM anuncio WHERE idanuncio = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'i', $idanuncio);
@@ -188,7 +188,7 @@ function listarCategorias($conexao) {
 };
 
 function deletarCategoria($conexao, $idcategoria) {
-    $sql = "DELETE FROM favorito WHERE $idcategoria = ?";
+    $sql = "DELETE FROM categoria WHERE idcategoria = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'i', $idcategoria);
@@ -200,7 +200,7 @@ function deletarCategoria($conexao, $idcategoria) {
 };
 
 function salvarCategoria($conexao, $nome) {
-    $sql = "INSERT INTO favorito (nome) VALUES (?)";
+    $sql = "INSERT INTO categoria (nome) VALUES (?)";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 's', $nome);
@@ -213,7 +213,7 @@ function salvarCategoria($conexao, $nome) {
 
 
 function editarCategoria($conexao, $nome, $idcategoria) {
-    $sql = "UPDATE favorito SET nome = ? WHERE idcategoria = ?";
+    $sql = "UPDATE categoria SET nome = ? WHERE idcategoria = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'si', $nome, $idcategoria);
@@ -302,5 +302,38 @@ mysqli_stmt_close($comando);
 return $categoria;
 };
 
+function salvarImagem($conexao, $caminho, $idanuncio) {
+    $sql = "INSERT INTO imagem (caminho, idanuncio) VALUES (?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
 
+    mysqli_stmt_bind_param($comando, 'si', $caminho, $idanuncio);
+     $nome_arquivo = $_FILES['foto']['name'];
+    $caminho_temporario = $_FILES['foto']['tmp_name'];
+
+    //pegar a extensão do arquivo
+    $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
+
+    //gerar um novo nome
+    $novo_nome = uniqid() . "." . $extensao;
+
+    // lembre-se de criar a pasta e de ajustar as permissões.
+    $caminho_destino = "fotos/" . $novo_nome;
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
+    
+    return $funcionou; //true ou false
+};
+
+function deletarImagem($conexao, $idimagem) {
+    $sql = "DELETE FROM imagem WHERE idimagem = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idimagem);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
+    
+    return $funcionou; //true ou false
+};
 ?>
