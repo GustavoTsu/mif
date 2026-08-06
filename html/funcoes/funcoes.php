@@ -1,5 +1,16 @@
 <?php
 
+function salvarUsuario($conexao, $nome, $email, $numero, $matricula) {
+    $sql = "INSERT INTO usuario (nome, email, numero, matricula, admin) VALUES (?, ?, ?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'sssss', $nome, $email, $numero, $matricula);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
 function deletarUsuario($conexao, $idusuario) {
     $sql = "DELETE FROM usuario WHERE idusuario = ?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -11,6 +22,18 @@ function deletarUsuario($conexao, $idusuario) {
     
     return $funcionou; //true ou false
 }
+
+function editarUsuario($conexao, $nome, $email, $numero, $matricula, $idusuario) {
+    $sql = "UPDATE usuario SET nome=?, email=?, numero=?, matricula=? admin=? WHERE idusuario=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'sssssi', $nome, $email, $numero, $matricula, $idusuario);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
 
 function listarusuario($conexao) {
     $sql = "SELECT * FROM usuario";
@@ -28,24 +51,60 @@ function listarusuario($conexao) {
     return $lista_usuario;
 }
 
-function salvarUsuario($conexao, $nome, $email, $numero, $matricula) {
-    $sql = "INSERT INTO usuario (nome, email, numero, matricula, admin) VALUES (?, ?, ?, ?, ?)";
-    $comando = mysqli_prepare($conexao, $sql);
-    
-    mysqli_stmt_bind_param($comando, 'sssss', $nome, $email, $numero, $matricula);
-    
-    $funcionou = mysqli_stmt_execute($comando);
-    
-    mysqli_stmt_close($comando);
-    return $funcionou;
+function pesquisarUsuarioId($conexao, $idusuario){
+$sql = "SELECT * FROM usuario WHERE idusuario =?";
+$comando = mysqli_prepare($conexao, $sql);
+
+mysqli_stmt_bind_param($comando, 'i', $idusuario);
+
+mysqli_stmt_execute($comando);
+$resultado = mysqli_stmt_get_result($comando);
+
+$usuario = mysqli_fetch_assoc($resultado);
+
+mysqli_stmt_close($comando);
+return $usuario;
+
 };
 
-function editarUsuario($conexao, $nome, $email, $numero, $matricula, $idusuario) {
-    $sql = "UPDATE usuario SET nome=?, email=?, numero=?, matricula=? admin=? WHERE idusuario=?";
+function pequisarUsuarioNome($conexao, $nome){
+    $sql = "SELECT * FROM usuario WHERE nome LIKE ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    $nomeBusca = '%' . $nome . '%';
+    $stmt->bind_param("s", $nomeBusca);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
+function salvarCategoria($conexao, $nome) {
+    $sql = "INSERT INTO categoria (nome) VALUES (?)";
     $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 's', $nome);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
     
-    mysqli_stmt_bind_param($comando, 'sssssi', $nome, $email, $numero, $matricula, $idusuario);
+    return $funcionou; //true ou false
+};
+
+function deletarCategoria($conexao, $idcategoria) {
+    $sql = "DELETE FROM categoria WHERE idcategoria = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idcategoria);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
     
+    return $funcionou; //true ou false
+};
+
+function editarCategoria($conexao, $nome, $idcategoria) {
+    $sql = "UPDATE categoria SET nome = ? WHERE idcategoria = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'si', $nome, $idcategoria);
     $funcionou = mysqli_stmt_execute($comando);
     
     mysqli_stmt_close($comando);
@@ -185,61 +244,6 @@ function listarCategorias($conexao) {
 
     mysqli_stmt_close($comando);
     return $lista_vendas;
-};
-
-function deletarCategoria($conexao, $idcategoria) {
-    $sql = "DELETE FROM categoria WHERE idcategoria = ?";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'i', $idcategoria);
-    $funcionou = mysqli_stmt_execute($comando);
-
-    mysqli_stmt_close($comando);
-    
-    return $funcionou; //true ou false
-};
-
-function salvarCategoria($conexao, $nome) {
-    $sql = "INSERT INTO categoria (nome) VALUES (?)";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 's', $nome);
-    $funcionou = mysqli_stmt_execute($comando);
-
-    mysqli_stmt_close($comando);
-    
-    return $funcionou; //true ou false
-};
-
-
-function editarCategoria($conexao, $nome, $idcategoria) {
-    $sql = "UPDATE categoria SET nome = ? WHERE idcategoria = ?";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'si', $nome, $idcategoria);
-    $funcionou = mysqli_stmt_execute($comando);
-    
-    mysqli_stmt_close($comando);
-    return $funcionou;
-};
-
-
-
-
-function pesquisarUsuarioId($conexao, $idusuario){
-$sql = "SELECT * FROM usuario WHERE idusuario =?";
-$comando = mysqli_prepare($conexao, $sql);
-
-mysqli_stmt_bind_param($comando, 'i', $idusuario);
-
-mysqli_stmt_execute($comando);
-$resultado = mysqli_stmt_get_result($comando);
-
-$usuario = mysqli_fetch_assoc($resultado);
-
-mysqli_stmt_close($comando);
-return $usuario;
-
 };
 
 function pesquisarAnuncioId($conexao,$idanuncio) {
