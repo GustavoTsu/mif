@@ -163,6 +163,7 @@ function resolveUrl(string $base, string $href): string
     return $full;
 }
 
+$matriculaEstudante = $_SESSION['usuario'] ?? null;
 function consultarNomeEstudante(string $matriculaEstudante): ?string
 {
     $matriculaEstudante = trim($matriculaEstudante);
