@@ -2,7 +2,7 @@
 
 session_start();
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 use DiDom\Document;
 
@@ -197,6 +197,86 @@ function consultarNomeEstudante(string $matriculaEstudante): ?string
     return null;
 }
 
+function consultarEmailEstudante(string $matriculaEstudante): ?string
+{
+    $matriculaEstudante = trim($matriculaEstudante);
+
+    if ($matriculaEstudante === '') {
+        return null;
+    }
+
+    $URLEstudante = SUAP_BASE . '/edu/aluno/' . $matriculaEstudante;
+
+    $html = suapRequest($URLEstudante);
+    $document = new Document($html);
+
+    foreach ($document->find('dt') as $dt) {
+        $label = trim($dt->text());
+
+        if ($label === 'E-mail Acadêmico') {
+            $pai = $dt->parent();
+            if ($pai) {
+                $dd = $pai->first('dd');
+                if ($dd) {
+                    $p = $dd->first('p');
+                    $email = $p ? trim($p->text()) : trim($dd->text());
+
+                    if ($email === '' || $email === '-') {
+                        return null;
+                    }
+                    return $email;
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
+
+function consultarTelefoneEstudante(string $matriculaEstudante): ?string
+{
+    $matriculaEstudante = trim($matriculaEstudante);
+
+    if ($matriculaEstudante === '') {
+        return null;
+    }
+
+    $URLEstudante = SUAP_BASE . '/edu/aluno/' . $matriculaEstudante . '/?tab=dados_pessoais';
+
+    $html = suapRequest($URLEstudante);
+    $document = new Document($html);
+
+    foreach ($document->find('dt') as $dt) {
+        $label = trim($dt->text());
+        
+        if ($label === 'Telefone Principal') {
+            $pai = $dt->parent();
+            if ($pai) {
+                $dd = $pai->first('dd');
+                if ($dd) {
+                    $telefone = trim($dd->text());
+
+                    if ($telefone === '' || $telefone === '-') {
+                        return null;
+                    }
+                    return $telefone;
+                }
+            }
+        }
+    }
+
+    return null;
+}
+
+
 $nome = consultarNomeEstudante($matriculaEstudante);
+$email = consultarEmailEstudante($matriculaEstudante);
+$telefone = consultarTelefoneEstudante($matriculaEstudante);
 echo $nome;
+echo "<br>";
+echo $email;
+echo "<br>";
+echo $telefone;
+echo "<br>";
 ?>

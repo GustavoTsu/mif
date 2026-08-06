@@ -17,7 +17,7 @@
     <a href="login.php">login</a>
     <hr>
     <br>
-    <a href="">pegar dados
+    <a href="/funcoes/crawlerSUAP.php">pegar dados
     </a>
 </body>
 </html>
