@@ -35,7 +35,7 @@ function editarUsuario($conexao, $nome, $email, $numero, $matricula, $idusuario)
     return $funcionou;
 };
 
-function listarusuario($conexao) {
+function listarUsuario($conexao) {
     $sql = "SELECT * FROM usuario";
     $comando = mysqli_prepare($conexao, $sql);
 
@@ -111,125 +111,6 @@ function editarCategoria($conexao, $nome, $idcategoria) {
     return $funcionou;
 };
 
-function deletarFavorito($conexao, $idusuario, $idanuncio) {
-    $sql = "DELETE FROM favorito WHERE idusuario = ? AND idanuncio = ?";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idanuncio);
-    $funcionou = mysqli_stmt_execute($comando);
-
-    mysqli_stmt_close($comando);
-    
-    return $funcionou; //true ou false
-};
-
-function listarFavoritos($conexao) {
-    $sql = "SELECT * FROM favorito";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
-
-    $lista_favoritos = [];
-    while ($favorito = mysqli_fetch_assoc($resultado)) {
-        $lista_favoritos[] = $favorito;
-    }
-
-    mysqli_stmt_close($comando);
-    return $lista_favoritos;
-};
-
-function salvarFavorito($conexao, $idusuario, $idanuncio) {
-    $sql = "INSERT INTO favorito (idusuario, idanuncio) VALUES (?,?)";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idanuncio);
-    $funcionou = mysqli_stmt_execute($comando);
-
-    mysqli_stmt_close($comando);
-    
-    return $funcionou; //true ou false
-};
-
-
-function editarFavorito($conexao, $idusuario, $idanuncio) {
-    $sql = "UPDATE favorito SET idusuario=? , idanuncio=? WHERE idusuario = ? AND idanuncio = ?";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando,'ii', $idusuario, $idanuncio);
-    $funcionou = mysqli_stmt_execute($comando);
-    
-    mysqli_stmt_close($comando);
-    return $funcionou;
-};
-
-function deletarAnuncio($conexao, $idanuncio) {
-    $sql = "DELETE FROM anuncio WHERE idanuncio = ?";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'i', $idanuncio);
-    $funcionou = mysqli_stmt_execute($comando);
-
-    mysqli_stmt_close($comando);
-    
-    return $funcionou; //true ou false
-};
-
-
-function listarAnuncios($conexao) {
-    $sql = "SELECT * FROM anuncio";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
-
-    $lista_anuncios = [];
-    while ($anuncio = mysqli_fetch_assoc($resultado)) {
-        $lista_vendas[] = $anuncio;
-    }
-
-    mysqli_stmt_close($comando);
-    return $lista_vendas;
-};
-
-
-
-function salvarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario){
-    $sql= "INSERT INTO anuncio (titulo, descricao, estado, tipo, preco, periodoaluguel, troca, idcategoria, status, idusuario) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'ssssdssisi', $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario);
-    $funcionou = mysqli_stmt_execute($comando);
-    mysqli_stmt_close($comando);
-    return $funcionou;
-};
-
-function editarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario){
-    $sql= "UPDATE anuncio (titulo, descricao, estado, tipo, preco, periodoaluguel, troca, idcategoria, status, idusuario) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'ssssdssisi', $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario);
-    $funcionou = mysqli_stmt_execute($comando);
-    mysqli_stmt_close($comando);
-    return $funcionou;
-};
-
-
-
-function listarImagem($conexao) {
-    $sql = "SELECT * FROM imagem";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
-
-    $lista_anuncios = [];
-    while ($anuncio = mysqli_fetch_assoc($resultado)) {
-        $lista_vendas[] = $anuncio;
-    }
-
-    mysqli_stmt_close($comando);
-    return $lista_vendas;
-};
-
 function listarCategorias($conexao) {
     $sql = "SELECT * FROM categoria";
     $comando = mysqli_prepare($conexao, $sql);
@@ -246,52 +127,7 @@ function listarCategorias($conexao) {
     return $lista_vendas;
 };
 
-function pesquisarAnuncioId($conexao,$idanuncio) {
-$sql = "SELECT * FROM anuncio WHERE idanuncio =?";
-$comando = mysqli_prepare($conexao, $sql);
-    
-mysqli_stmt_bind_param($comando, 'i', $idanuncio);
-    
-mysqli_stmt_execute($comando);
-$resultado = mysqli_stmt_get_result($comando);
-    
-$anuncio = mysqli_fetch_assoc($resultado);
-    
-mysqli_stmt_close($comando);
-return $anuncio;
-};
-
-function pesquisarfavoritoId($conexao, $idusuario, $idanuncio) {
-$sql = "SELECT * FROM favorito WHERE idusuario = ? AND idanuncio = ?";
-$comando = mysqli_prepare($conexao, $sql);
-    
-mysqli_stmt_bind_param($comando, 'i', $idusuario, $idanuncio);
-    
-mysqli_stmt_execute($comando);
-$resultado = mysqli_stmt_get_result($comando);
-    
-$favorito = mysqli_fetch_assoc($resultado);
-    
-mysqli_stmt_close($comando);
-return $favorito;
-};
-
-function pesquisarImagemId($conexao,$idimagem) {
-$sql = "SELECT * FROM imagem WHERE idimagem =?";
-$comando = mysqli_prepare($conexao, $sql);
-    
-mysqli_stmt_bind_param($comando, 'i', $idimagem);
-    
-mysqli_stmt_execute($comando);
-$resultado = mysqli_stmt_get_result($comando);
-    
-$imagem = mysqli_fetch_assoc($resultado);
-    
-mysqli_stmt_close($comando);
-return $imagem;
-};
-
-function pesquisarcategoriaId($conexao,$idcategoria) {
+function pesquisarCategoriaId($conexao,$idcategoria) {
 $sql = "SELECT * FROM categoria WHERE idcategoria =?";
 $comando = mysqli_prepare($conexao, $sql);
     
@@ -305,6 +141,15 @@ $categoria = mysqli_fetch_assoc($resultado);
 mysqli_stmt_close($comando);
 return $categoria;
 };
+
+function pesquisarCategoriaNome($conexao, $nome){
+    $sql = "SELECT * FROM categoria WHERE nome LIKE ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    $nomeBusca = '%' . $nome . '%';
+    $stmt->bind_param("s", $nomeBusca);
+    $stmt->execute();
+    return $stmt->get_result();
+}
 
 function salvarImagem($conexao, $caminho, $idanuncio) {
     $sql = "INSERT INTO imagem (caminho, idanuncio) VALUES (?, ?)";
@@ -340,4 +185,190 @@ function deletarImagem($conexao, $idimagem) {
     
     return $funcionou; //true ou false
 };
+
+function listarImagem($conexao) {
+    $sql = "SELECT * FROM imagem";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_anuncios = [];
+    while ($anuncio = mysqli_fetch_assoc($resultado)) {
+        $lista_vendas[] = $anuncio;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_vendas;
+};
+
+function pesquisarImagemId($conexao,$idimagem) {
+$sql = "SELECT * FROM imagem WHERE idimagem =?";
+$comando = mysqli_prepare($conexao, $sql);
+    
+mysqli_stmt_bind_param($comando, 'i', $idimagem);
+    
+mysqli_stmt_execute($comando);
+$resultado = mysqli_stmt_get_result($comando);
+    
+$imagem = mysqli_fetch_assoc($resultado);
+    
+mysqli_stmt_close($comando);
+return $imagem;
+};
+
+function editarImagem($conexao, $caminho, $idanuncio) {
+    $sql = "UPDATE imagem SET caminho=?, idanuncio=? WHERE idimagem=?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando,'si', $caminho, $idanuncio);
+    $funcionou = mysqli_stmt_execute($comando);
+    
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
+function salvarFavorito($conexao, $idusuario, $idanuncio) {
+    $sql = "INSERT INTO favorito (idusuario, idanuncio) VALUES (?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idanuncio);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
+    
+    return $funcionou; //true ou false
+};
+
+function deletarFavorito($conexao, $idusuario, $idanuncio) {
+    $sql = "DELETE FROM favorito WHERE idusuario = ? AND idanuncio = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idanuncio);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
+    
+    return $funcionou; //true ou false
+};
+
+function pesquisarFavoritoId($conexao, $idusuario, $idanuncio) {
+$sql = "SELECT * FROM favorito WHERE idusuario = ? AND idanuncio = ?";
+$comando = mysqli_prepare($conexao, $sql);
+    
+mysqli_stmt_bind_param($comando, 'i', $idusuario, $idanuncio);
+    
+mysqli_stmt_execute($comando);
+$resultado = mysqli_stmt_get_result($comando);
+    
+$favorito = mysqli_fetch_assoc($resultado);
+    
+mysqli_stmt_close($comando);
+return $favorito;
+};
+
+function pesquisarFavoritoNome($conexao, $nome){
+    $sql = "SELECT * FROM favorito WHERE nome LIKE ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    $nomeBusca = '%' . $nome . '%';
+    $stmt->bind_param("s", $nomeBusca);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
+function listarFavoritos($conexao) {
+    $sql = "SELECT * FROM favorito";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_favoritos = [];
+    while ($favorito = mysqli_fetch_assoc($resultado)) {
+        $lista_favoritos[] = $favorito;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_favoritos;
+};
+
+function editarFavorito($conexao, $idusuario, $idanuncio) {
+    $sql = "UPDATE favorito SET idusuario=? , idanuncio=? WHERE idusuario = ? AND idanuncio = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando,'ii', $idusuario, $idanuncio);
+    $funcionou = mysqli_stmt_execute($comando);
+    
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
+
+function salvarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario){
+    $sql= "INSERT INTO anuncio (titulo, descricao, estado, tipo, preco, periodoaluguel, troca, idcategoria, status, idusuario) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'ssssdssisi', $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario);
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
+
+function listarAnuncios($conexao) {
+    $sql = "SELECT * FROM anuncio";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_anuncios = [];
+    while ($anuncio = mysqli_fetch_assoc($resultado)) {
+        $lista_vendas[] = $anuncio;
+    }
+
+    mysqli_stmt_close($comando);
+    return $lista_vendas;
+};
+
+function deletarAnuncio($conexao, $idanuncio) {
+    $sql = "DELETE FROM anuncio WHERE idanuncio = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $idanuncio);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
+    
+    return $funcionou; //true ou false
+};
+
+function editarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario){
+    $sql= "UPDATE anuncio (titulo, descricao, estado, tipo, preco, periodoaluguel, troca, idcategoria, status, idusuario) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'ssssdssisi', $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario);
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    return $funcionou;
+};
+
+function pesquisarAnuncioId($conexao,$idanuncio) {
+$sql = "SELECT * FROM anuncio WHERE idanuncio =?";
+$comando = mysqli_prepare($conexao, $sql);
+    
+mysqli_stmt_bind_param($comando, 'i', $idanuncio);
+    
+mysqli_stmt_execute($comando);
+$resultado = mysqli_stmt_get_result($comando);
+    
+$anuncio = mysqli_fetch_assoc($resultado);
+    
+mysqli_stmt_close($comando);
+return $anuncio;
+};
+
+function pesquisarAnuncioNome($conexao, $nome){
+    $sql = "SELECT * FROM anuncio WHERE nome LIKE ?";
+    $stmt = mysqli_prepare($conexao, $sql);
+    $nomeBusca = '%' . $nome . '%';
+    $stmt->bind_param("s", $nomeBusca);
+    $stmt->execute();
+    return $stmt->get_result();
+}
 ?>
