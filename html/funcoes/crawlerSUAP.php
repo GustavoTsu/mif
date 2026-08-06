@@ -198,3 +198,4 @@ function consultarNomeEstudante(string $matriculaEstudante): ?string
 
 $nome = consultarNomeEstudante($matriculaEstudante);
 echo $nome;
+?>
