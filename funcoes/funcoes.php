@@ -307,7 +307,7 @@ function salvarImagem($conexao, $caminho, $idanuncio) {
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'si', $caminho, $idanuncio);
-     $nome_arquivo = $_FILES['foto']['name'];
+    $nome_arquivo = $_FILES['foto']['name'];
     $caminho_temporario = $_FILES['foto']['tmp_name'];
 
     //pegar a extensão do arquivo

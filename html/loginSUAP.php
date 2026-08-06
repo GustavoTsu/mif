@@ -33,8 +33,8 @@
 
             if ($token) {
                 $_SESSION['usuarioLogado'] = true;
-                // Setar demais variávei de sessão
-
+                $_SESSION['usuario'] = $_POST['matriculaUsuario'];
+                $_SESSION['senha'] = $_POST['senhaUsuario'];
 
                 header("Location: index.php?login=deucerto"); // Redirecionar para a página principal
                 exit;
