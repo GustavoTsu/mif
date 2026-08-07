@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `banco`.`usuario` (
   `email` VARCHAR(45) NOT NULL,
   `numero` CHAR(14) NOT NULL,
   `matricula` CHAR(16) NOT NULL,
-  `admin` INT(1) NOT NULL,
+  `admin` INT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`idusuario`))
 ENGINE = InnoDB;
 

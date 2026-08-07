@@ -206,6 +206,13 @@ header .btn-anunciar:hover {
     color: var(--verde);
 }
 
+.btn-outline-vermelho {
+    background-color: transparent;
+    border: 2px solid var(--vermelho);
+    color: var(--verde);
+}
+
+
 .btn-outline:hover {
     background-color: var(--verde);
     color: var(--branco);

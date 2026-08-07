@@ -21,13 +21,6 @@
 </header>
 
 <div class="container">
-    <div class="breadcrumb">
-        <a href="index.html">Início</a>
-        <span>&rsaquo;</span>
-        <a href="index.html?categoria=jalecos">Jalecos</a>
-        <span>&rsaquo;</span>
-        <span>Jaleco de laboratório M</span>
-    </div>
 
     <div class="layout-produto">
         <div class="coluna-fotos">
@@ -55,13 +48,18 @@
                     <tr><td>Categoria</td><td>Jalecos</td></tr>
                     <tr><td>Estado do item</td><td>Seminovo</td></tr>
                     <tr><td>Tipo</td><td>Venda</td></tr>
-                    <tr><td>Campus</td><td>Campus Morrinhos</td></tr>
                     <tr><td>Publicado em</td><td>01/04/2025</td></tr>
                     <tr><td>Código do anúncio</td><td>#<!-- BANCO: produto.id --></td></tr>
                 </table>
-
-                <a href="#chat" class="btn btn-verde btn-bloco mb-16">Entrar em contato</a>
                 <a href="vendedor.html?id=1" class="btn btn-outline btn-bloco">Ver perfil do vendedor</a>
+
+                <?php
+                if(1 == 2) {
+                echo `<a href="vendedor.html?id=1" class="btn btn-outline-vermelho btn-bloco">Encerrar</a>`;
+                } else {
+                    echo "<p style='color:red;''>botão encerrar caso vc seja dono do anúncio</p>";
+                }
+                ?>
             </div>
         </div>
     </div>
@@ -75,44 +73,11 @@
             <div class="nome-vendedor">
                 <a href="vendedor.html?id=1">João Silva</a>
             </div>
-            <div class="info-vendedor">
-                Campus Morrinhos &mdash; Técnico em Química
-            </div>
-            <div class="mt-8">
-                <span class="estrelas">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
-                <span class="avaliacao-numero">4,2</span>
-                <span class="avaliacao-numero">(12 avaliações)</span>
-            </div>
-            <div class="mt-8 text-xsmall text-cinza">
-                Membro desde 03/2024
-            </div>
         </div>
         <div class="ml-auto">
             <a href="vendedor.html?id=1" class="btn btn-outline">Ver perfil</a>
         </div>
     </div>
-
-    <hr class="divider">
-    <h2 class="secao-titulo" id="chat">Chat com o vendedor</h2>
-
-    <div class="chat-container">
-        <div class="msg-wrapper">
-            <span class="font-bold text-small">Maria Souza</span>
-            <span class="text-xsmall text-cinza ml-8">10:30</span>
-            <div class="msg-bubble other">Olá! Ainda está disponível?</div>
-        </div>
-
-        <div class="msg-wrapper me">
-            <span class="font-bold text-small">Você</span>
-            <span class="text-xsmall text-cinza ml-8">10:35</span>
-            <div class="msg-bubble me">Sim! Pode vir buscar no campus.</div>
-        </div>
-    </div>
-
-    <form action="#" method="POST" class="flex gap-10">
-        <input type="text" name="texto" placeholder="Digite sua mensagem..." class="flex-1">
-        <button type="submit" class="btn btn-verde">Enviar</button>
-    </form>
 
     <hr class="divider">
     <h2 class="secao-titulo">Mais anúncios deste vendedor</h2>
