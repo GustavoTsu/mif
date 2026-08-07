@@ -2,13 +2,15 @@
 require_once 'conexao.php';
 require_once 'funcoes/funcoes.php';
 
-$id = 1 ;
 
-$resultado = pesquisarUsuarioId($conexao, $id) ;
+
+$resultado = listarCategorias($conexao);
 if ($resultado) {
-     print_r($resultado);
+    print_r($resultado);
+    echo "</pre";
+
 }
 else {
-    echo "error";
+    echo "erro";
 }
 ?>
