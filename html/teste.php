@@ -2,11 +2,11 @@
 require_once 'conexao.php';
 require_once 'funcoes/funcoes.php';
 
-$idUsuario = 1;
+$id = 1 ;
 
-$resultado = deletarUsuario($conexao, $idUsuario);
+$resultado = pesquisarUsuarioId($conexao, $id) ;
 if ($resultado) {
-    echo "Removido";
+     print_r($resultado);
 }
 else {
     echo "error";

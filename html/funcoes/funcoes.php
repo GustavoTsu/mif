@@ -21,7 +21,7 @@ function deletarUsuario($conexao, $idusuario) {
     mysqli_stmt_close($comando);
     
     return $funcionou; //true ou false
-}
+} //testado e averiguado 100% pelo Sun
 
 function editarUsuario($conexao, $nome, $email, $numero, $matricula, $idusuario) {
     $sql = "UPDATE usuario SET nome=?, email=?, numero=?, matricula=? admin=? WHERE idusuario=?";
