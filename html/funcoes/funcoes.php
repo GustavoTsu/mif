@@ -17,7 +17,7 @@ function salvarUsuario($conexao, $nome, $email, $numero, $matricula, $admin)
     $sql = "INSERT INTO usuario (nome, email, numero, matricula, admin) VALUES (?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'sssss', $nome, $email, $numero, $matricula, $admin);
+    mysqli_stmt_bind_param($comando, 'ssssi', $nome, $email, $numero, $matricula, $admin);
 
     $funcionou = mysqli_stmt_execute($comando);
 
