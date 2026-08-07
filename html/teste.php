@@ -2,13 +2,15 @@
 require_once 'conexao.php';
 require_once 'funcoes/funcoes.php';
 
-$idUsuario = 1;
 
-$resultado = deletarUsuario($conexao, $idUsuario);
+
+$resultado = listarCategorias($conexao);
 if ($resultado) {
-    echo "Removido";
+    print_r($resultado);
+    echo "</pre";
+
 }
 else {
-    echo "error";
+    echo "erro";
 }
 ?>
