@@ -29,14 +29,43 @@ else {
 }
 
 
+$nome = "teste2" ;
+$email = "teste@teste";
+$num = "123456789";
+$matricula = "123123";
+$admin = "0";
 
+$resultado = salvarUsuario($conexao, $nome, $email, $num, $matricula, $admin) ;
+if ($resultado) {
+     echo "usuario salvo";
+}
+else {
+    echo "error";
+}
 
 
+$email = "teste5@teste";
 
 
+$resultado = editarUsuario($conexao, $email);
+if ($resultado) {
+     echo "usuario atualizadp";
+}
+else {
+    echo "error";
+}
 
 
+$resultado = listarCategorias($conexao);
+if ($resultado) {
+echo "<pre>";
+    print_r($resultado);
+    echo "</pre";
 
+}
+else {
+    echo "erro";
+}
 
 
 
@@ -114,33 +143,4 @@ else {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
+?>  

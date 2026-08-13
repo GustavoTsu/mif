@@ -206,11 +206,26 @@ header .btn-anunciar:hover {
     color: var(--verde);
 }
 
+.btn-outline-vermelho {
+    background-color: transparent;
+    border: 2px solid var(--vermelho);
+    color: var(--vermelho);
+    text-decoration: none;
+}
+
+
 .btn-outline:hover {
     background-color: var(--verde);
     color: var(--branco);
     text-decoration: none;
 }
+
+.btn-outline-vermelho:hover {
+    background-color: var(--vermelho);
+    color: var(--branco);
+    text-decoration: none;
+}
+
 
 .btn-bloco {
     display: block;
