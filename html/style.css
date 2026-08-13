@@ -209,7 +209,8 @@ header .btn-anunciar:hover {
 .btn-outline-vermelho {
     background-color: transparent;
     border: 2px solid var(--vermelho);
-    color: var(--verde);
+    color: var(--vermelho);
+    text-decoration: none;
 }
 
 
@@ -218,6 +219,13 @@ header .btn-anunciar:hover {
     color: var(--branco);
     text-decoration: none;
 }
+
+.btn-outline-vermelho:hover {
+    background-color: var(--vermelho);
+    color: var(--branco);
+    text-decoration: none;
+}
+
 
 .btn-bloco {
     display: block;
@@ -976,7 +984,7 @@ footer a:hover {
 .text-xlarge { font-size: 1.8rem; }
 .text-title { font-size: 1.1rem; color: var(--verde); }
 
-/* Chat (produto.php) */
+/* Chat (produto.html) */
 .chat-container {
     background: var(--branco);
     border: 1px solid var(--cinza-borda);
@@ -1001,7 +1009,7 @@ footer a:hover {
 .msg-bubble.other { background: #f0f0f0; }
 .msg-bubble.me { background: #e8f5e9; }
 
-/* Cadastro de Produto (cadastro-produto.php) */
+/* Cadastro de Produto (cadastro-produto.html) */
 .form-card {
     background: var(--branco);
     border: 1px solid var(--cinza-borda);
