@@ -12,12 +12,12 @@ function logout()
 {
     session_destroy();
 }
-function salvarUsuario($conexao, $nome, $email, $numero, $matricula, $admin)
+function salvarUsuario($conexao, $nome, $email, $numero, $matricula)
 {
-    $sql = "INSERT INTO usuario (nome, email, numero, matricula, admin) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuario (nome, email, numero, matricula) VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'ssssi', $nome, $email, $numero, $matricula, $admin);
+    mysqli_stmt_bind_param($comando, 'ssss', $nome, $email, $numero, $matricula);
 
     $funcionou = mysqli_stmt_execute($comando);
 
@@ -37,12 +37,12 @@ function deletarUsuario($conexao, $idusuario)
     return $funcionou; //true ou false
 } //testado e averiguado 100% pelo Sun
 
-function editarUsuario($conexao, $nome, $email, $numero, $matricula, $admin, $idusuario)
+function editarUsuario($conexao, $nome, $email, $numero, $matricula , $idusuario)
 {
-    $sql = "UPDATE usuario SET nome=?, email=?, numero=?, matricula=?, admin=? WHERE idusuario=?";
+    $sql = "UPDATE usuario SET nome=?, email=?, numero=?, matricula=? WHERE idusuario=?";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'sssssi', $nome, $email, $numero, $matricula, $admin, $idusuario);
+    mysqli_stmt_bind_param($comando, 'ssssi', $nome, $email, $numero, $matricula, $idusuario);
 
     $funcionou = mysqli_stmt_execute($comando);
 
@@ -139,14 +139,15 @@ function listarCategorias($conexao)
     mysqli_stmt_execute($comando);
     $resultado = mysqli_stmt_get_result($comando);
 
-    $lista_anuncios = [];
-    while ($anuncio = mysqli_fetch_assoc($resultado)) {
-        $lista_vendas[] = $anuncio;
+    $lista_categorias = [];
+    while ($categoria = mysqli_fetch_assoc($resultado)) {
+        $lista_categorias[] = $categoria;
     }
 
     mysqli_stmt_close($comando);
-    return $lista_vendas;
+    return $lista_categorias;
 };
+
 
 function pesquisarCategoriaId($conexao, $idcategoria)
 {
@@ -219,9 +220,9 @@ function listarImagem($conexao)
     mysqli_stmt_execute($comando);
     $resultado = mysqli_stmt_get_result($comando);
 
-    $lista_anuncios = [];
-    while ($anuncio = mysqli_fetch_assoc($resultado)) {
-        $lista_vendas[] = $anuncio;
+    $lista_imagens = [];
+    while ($imagem = mysqli_fetch_assoc($resultado)) {
+        $lista_imagens[] = $imagem;
     }
 
     mysqli_stmt_close($comando);
