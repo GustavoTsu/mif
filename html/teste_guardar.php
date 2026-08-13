@@ -68,7 +68,39 @@ else {
 }
 
 
+$resultado = listarCategorias($conexao);
+if ($resultado) {
+    print_r($resultado);
+    echo "</pre";
 
+}
+else {
+    echo "erro";
+}
+
+
+$id = 3;
+
+$resultado = pesquisarCategoriaId($conexao, $id);
+if ($resultado) {
+    print_r($resultado);
+    echo "</pre";
+
+}
+else {
+    echo "erro";
+}
+
+$nome = "carro";
+
+$resultado = pesquisarCategoriaNome($conexao, $nome);
+if ($resultado) {
+    $qlqrcoisa = mysqli_fetch_assoc($resultado);
+    echo $qlqrcoisa["idcategoria"];
+}
+else {
+    echo "erro";
+}
 
 
 

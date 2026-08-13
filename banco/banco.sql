@@ -18,7 +18,7 @@ CREATE SCHEMA IF NOT EXISTS `banco` ;
 USE `banco` ;
 
 -- -----------------------------------------------------
--- Table `banco`.`Usuarios`
+-- Table `banco`.`usuarios`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `banco`.`usuario` (
   `idusuario` INT NOT NULL AUTO_INCREMENT,
@@ -59,15 +59,15 @@ CREATE TABLE IF NOT EXISTS `banco`.`anuncio` (
   `datahora` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idanuncio`),
   INDEX `fk_anuncio_categoria_idx` (`idcategoria` ASC) VISIBLE,
-  INDEX `fk_anuncio_Usuarios1_idx` (`idusuario` ASC) VISIBLE,
+  INDEX `fk_anuncio_usuarios1_idx` (`idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_anuncio_categoria`
     FOREIGN KEY (`idcategoria`)
     REFERENCES `banco`.`categoria` (`idcategoria`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_anuncio_Usuarios1`
+  CONSTRAINT `fk_anuncio_usuarios1`
     FOREIGN KEY (`idusuario`)
-    REFERENCES `banco`.`Usuarios` (`idusuario`)
+    REFERENCES `banco`.`usuarios` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -97,14 +97,14 @@ CREATE TABLE IF NOT EXISTS `banco`.`favorito` (
   `idusuario` INT NOT NULL,
   `idanuncio` INT NOT NULL,
   PRIMARY KEY (`idusuario`, `idanuncio`),
-  INDEX `fk_Usuarios_has_anuncio_anuncio1_idx` (`idanuncio` ASC) VISIBLE,
-  INDEX `fk_Usuarios_has_anuncio_Usuarios1_idx` (`idusuario` ASC) VISIBLE,
-  CONSTRAINT `fk_Usuarios_has_anuncio_Usuarios1`
+  INDEX `fk_usuarios_has_anuncio_anuncio1_idx` (`idanuncio` ASC) VISIBLE,
+  INDEX `fk_usuarios_has_anuncio_usuarios1_idx` (`idusuario` ASC) VISIBLE,
+  CONSTRAINT `fk_usuarios_has_anuncio_usuarios1`
     FOREIGN KEY (`idusuario`)
-    REFERENCES `banco`.`Usuarios` (`idusuario`)
+    REFERENCES `banco`.`usuarios` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Usuarios_has_anuncio_anuncio1`
+  CONSTRAINT `fk_usuarios_has_anuncio_anuncio1`
     FOREIGN KEY (`idanuncio`)
     REFERENCES `banco`.`anuncio` (`idanuncio`)
     ON DELETE NO ACTION
