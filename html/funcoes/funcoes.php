@@ -181,22 +181,29 @@ function salvarImagem($conexao, $caminho, $idanuncio)
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'si', $caminho, $idanuncio);
-    $nome_arquivo = $_FILES['foto']['name'];
-    $caminho_temporario = $_FILES['foto']['tmp_name'];
+    $arquivo = $_FILES['foto']['name'];
 
-    //pegar a extensão do arquivo
-    $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
+    $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
+    $permitidas = ['jpg', 'jpeg', 'png'];
 
-    //gerar um novo nome
-    $novo_nome = uniqid() . "." . $extensao;
+    if(!in_array($extensao, $permitidas)){ 
+        return false;
+    }
 
-    // lembre-se de criar a pasta e de ajustar as permissões.
-    $caminho_destino = "fotos/" . $novo_nome;
-    $funcionou = mysqli_stmt_execute($comando);
+    if($arquivo['size']> 1024 * 1024 * 2){ // permite até 2MB
+        return false;
+    }
 
-    mysqli_stmt_close($comando);
+    $nomeArquivo = uniqid() . "_" . $arquivo['name'];
+    $caminho = "/fotos" . $nomeArquivo; // uploads/capas/13516516has5_arvore.png
 
-    return $funcionou; //true ou false
+    if (move_uploaded_file($arquivo['tmp_name'], $caminho)){
+        $funcionou = mysqli_stmt_execute($comando);
+        mysqli_stmt_close($comando);
+        return $caminho;
+            
+    }
+    
 };
 
 function deletarImagem($conexao, $idimagem)
@@ -226,7 +233,7 @@ function listarImagem($conexao)
     }
 
     mysqli_stmt_close($comando);
-    return $lista_vendas;
+    return $lista_imagens;
 };
 
 function pesquisarImagemId($conexao, $idimagem)
