@@ -3,14 +3,13 @@ require_once 'conexao.php';
 require_once 'funcoes/funcoes.php';
 
 
+$nome = "carro";
 
-$resultado = listarCategorias($conexao);
+$resultado = salvarFavorito($conexao, $nome);
 if ($resultado) {
-    print_r($resultado);
-    echo "</pre";
-
+     echo "usuario salvo";
 }
 else {
-    echo "erro";
+    echo "error";
 }
 ?>
