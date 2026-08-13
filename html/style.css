@@ -976,7 +976,7 @@ footer a:hover {
 .text-xlarge { font-size: 1.8rem; }
 .text-title { font-size: 1.1rem; color: var(--verde); }
 
-/* Chat (produto.html) */
+/* Chat (produto.php) */
 .chat-container {
     background: var(--branco);
     border: 1px solid var(--cinza-borda);
@@ -1001,7 +1001,7 @@ footer a:hover {
 .msg-bubble.other { background: #f0f0f0; }
 .msg-bubble.me { background: #e8f5e9; }
 
-/* Cadastro de Produto (cadastro-produto.html) */
+/* Cadastro de Produto (cadastro-produto.php) */
 .form-card {
     background: var(--branco);
     border: 1px solid var(--cinza-borda);

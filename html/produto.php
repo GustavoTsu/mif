@@ -16,7 +16,7 @@
     </div>
     <nav>
         <a href="login.html">Entrar</a>
-        <a href="cadastro-produto.html" class="btn-anunciar">+ Anunciar</a>
+        <a href="cadastro-produto.php" class="btn-anunciar">+ Anunciar</a>
     </nav>
 </header>
 
@@ -82,7 +82,7 @@
     <hr class="divider">
     <h2 class="secao-titulo">Mais anúncios deste vendedor</h2>
     <div class="grid-produtos">
-        <a href="produto.html" class="card-produto">
+        <a href="produto.php" class="card-produto">
             <div class="foto-placeholder">Sem foto</div>
             <div class="info-card">
                 <span class="tipo-badge badge-venda">Venda</span>
