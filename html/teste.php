@@ -3,9 +3,9 @@ require_once 'conexao.php';
 require_once 'funcoes/funcoes.php';
 
 
-$nome = "carro";
+$n = "carro";
 
-$resultado = salvarFavorito($conexao, $nome);
+$resultado = salvarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario);
 if ($resultado) {
      echo "usuario salvo";
 }
