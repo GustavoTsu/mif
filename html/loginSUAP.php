@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require_once "funcoes/funcoes.php";
+    require_once "conexao.php";
 
 
     if (!empty($_POST['matriculaUsuario']) && !empty($_POST['senhaUsuario'])) {
@@ -31,10 +33,12 @@
             $result = json_decode($responseSession, true);
             $token = $result['access'] ?? null;
 
+
             if ($token) {
                 $_SESSION['usuarioLogado'] = true;
                 $_SESSION['usuario'] = $_POST['matriculaUsuario'];
                 $_SESSION['senha'] = $_POST['senhaUsuario'];
+                
 
                 header("Location: index.php?login=deucerto"); // Redirecionar para a página principal
                 exit;

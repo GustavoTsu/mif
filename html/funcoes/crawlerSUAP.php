@@ -273,6 +273,11 @@ function consultarTelefoneEstudante(string $matriculaEstudante): ?string
 $nome = consultarNomeEstudante($matriculaEstudante);
 $email = consultarEmailEstudante($matriculaEstudante);
 $telefone = consultarTelefoneEstudante($matriculaEstudante);
+$usuario = pesquisarUsuarioId($conexao, $_SESSION['usuario']);
+if (!$usuario) {
+salvarUsuario($conexao, $nome, $email, $telefone, $matriculaEstudante);
+}
+$_SESSION["tipo"] = $usuario["admin"];
 echo $nome;
 echo "<br>";
 echo $email;

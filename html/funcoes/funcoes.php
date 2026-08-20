@@ -6,7 +6,7 @@ function verificarLogin()
 }
 function verificarAdmin()
 {
-    return (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 'admin');
+    return (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1);
 }
 function logout()
 {
@@ -418,4 +418,8 @@ function pesquisarAnuncioNome($conexao, $nome)
     $stmt->bind_param("s", $nomeBusca);
     $stmt->execute();
     return $stmt->get_result();
+}
+
+function filtrarAnuncio() {
+    
 }
