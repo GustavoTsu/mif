@@ -1,9 +1,14 @@
 <?php
 require_once __DIR__ . '/../conexao.php';
-function verificarLogin()
-{
-    return isset($_SESSION['usuario']);
+
+function verificarLogin(){
+    // return isset($_SESSION['usuario']);
+    if (!isset($_SESSION['usuario'])) {
+        header("Location: login.php");
+    exit;
+    }
 }
+
 function verificarAdmin()
 {
     return (isset($_SESSION['tipo']) && $_SESSION['tipo'] == 1);
@@ -83,7 +88,24 @@ function pesquisarUsuarioId($conexao, $idusuario)
     return $usuario;
 };
 
-function pequisarUsuarioNome($conexao, $nome)
+function pesquisarUsuarioMatricula($conexao, $matricula)
+{
+    $sql = "SELECT * FROM usuario WHERE matricula =?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'i', $matricula);
+
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $usuario = mysqli_fetch_assoc($resultado);
+
+    mysqli_stmt_close($comando);
+    return $usuario;
+};
+
+
+function pesquisarUsuarioNome($conexao, $nome)
 {
     $sql = "SELECT * FROM usuario WHERE nome LIKE ?";
     $stmt = mysqli_prepare($conexao, $sql);

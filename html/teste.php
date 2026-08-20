@@ -4,6 +4,14 @@ require_once 'conexao.php';
 require_once 'funcoes/funcoes.php'; 
 $quebra = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 
+function verificarLogin(){
+    // return isset($_SESSION['usuario']);
+    if (!isset($_SESSION['usuario'])) {
+        header("Location: login.php");
+    exit;
+    }
+}
+
 // =====================================================
 // USUÁRIO
 // =====================================================
