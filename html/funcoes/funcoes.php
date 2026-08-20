@@ -1,5 +1,5 @@
 <?php
-require_once 'conexao.php';
+require_once __DIR__ . '/../conexao.php';
 function verificarLogin()
 {
     return isset($_SESSION['usuario']);
@@ -294,7 +294,7 @@ function pesquisarFavoritoId($conexao, $idusuario, $idanuncio)
     $sql = "SELECT * FROM favorito WHERE idusuario = ? AND idanuncio = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'i', $idusuario, $idanuncio);
+    mysqli_stmt_bind_param($comando, 'ii', $idusuario, $idanuncio);
 
     mysqli_stmt_execute($comando);
     $resultado = mysqli_stmt_get_result($comando);
@@ -421,5 +421,5 @@ function pesquisarAnuncioNome($conexao, $nome)
 }
 
 function filtrarAnuncio() {
-    
+
 }
