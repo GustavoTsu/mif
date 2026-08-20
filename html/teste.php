@@ -39,7 +39,15 @@ if ($resultado) {
     echo 'pesquisarUsuarioId: erro' . $quebra;
 }
 
-$resultado = pequisarUsuarioNome($conexao, $nome);
+$resultado = pesquisarUsuarioMatricula($conexao, $matricula);
+if ($resultado) {
+    echo 'pesquisarUsuarioId: funcionou' . $quebra;
+} else {
+    echo 'pesquisarUsuarioId: erro' . $quebra;
+}
+
+
+$resultado = pesquisarUsuarioNome($conexao, $nome);
 if ($resultado && $resultado->num_rows > 0) {
     echo 'pequisarUsuarioNome: funcionou' . $quebra;
 } else {

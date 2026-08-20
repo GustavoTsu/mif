@@ -6,6 +6,16 @@ require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/funcoes.php';
 require_once __DIR__ . '/../conexao.php';
 
+$matriculaEstudante = $_SESSION['usuario'] ?? null;
+if ($matriculaEstudante == null) {
+    header("Location: login.php");
+ }
+
+$usuario = pesquisarUsuarioMatricula($conexao, $matriculaEstudante);
+if ($usuario) {
+    header("Location: ../index.php");
+ }
+
 
 use DiDom\Document;
 
@@ -166,7 +176,6 @@ function resolveUrl(string $base, string $href): string
     return $full;
 }
 
-$matriculaEstudante = $_SESSION['usuario'] ?? null;
 function consultarNomeEstudante(string $matriculaEstudante): ?string
 {
     $matriculaEstudante = trim($matriculaEstudante);
@@ -276,18 +285,7 @@ function consultarTelefoneEstudante(string $matriculaEstudante): ?string
 $nome = consultarNomeEstudante($matriculaEstudante);
 $email = consultarEmailEstudante($matriculaEstudante);
 $telefone = consultarTelefoneEstudante($matriculaEstudante);
-echo strlen($telefone);
-echo $telefone;
-$telefone = str_replace(" ", "", $telefone);
-echo strlen($telefone);
-echo $telefone;
 
-$usuario = pesquisarUsuarioMatricula($conexao, $matriculaEstudante);
-if (!$usuario) {
 salvarUsuario($conexao, $nome, $email, $telefone, $matriculaEstudante);
-}
-
-print_r($usuario);
-echo $usuario;
-
+header("Location: ../index.php");
 ?>
