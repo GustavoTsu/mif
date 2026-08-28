@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar — MIF</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
@@ -36,9 +36,6 @@
             </form>
         </div>
 
-        <p class="text-center text-small text-cinza mt-16">
-            MIF &mdash; Marketplace do Instituto Federal Goiano
-        </p>
     </div>
     </div>
 

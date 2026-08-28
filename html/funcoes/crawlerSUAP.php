@@ -8,12 +8,14 @@ require_once __DIR__ . '/../conexao.php';
 
 $matriculaEstudante = $_SESSION['usuario'] ?? null;
 if ($matriculaEstudante == null) {
-    header("Location: login.php");
+    header("Location: ../login/login.php");
+    exit;
  }
 
 $usuario = pesquisarUsuarioMatricula($conexao, $matriculaEstudante);
 if ($usuario) {
     header("Location: ../index.php");
+    exit;
  }
 
 
@@ -281,6 +283,8 @@ function consultarTelefoneEstudante(string $matriculaEstudante): ?string
     return null;
 }
 
+
+$telefone = str_replace(" ", "", $telefone); // diminui a quantidade de caracteres do telefone para caber no banco
 
 $nome = consultarNomeEstudante($matriculaEstudante);
 $email = consultarEmailEstudante($matriculaEstudante);

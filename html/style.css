@@ -1,7 +1,7 @@
-/* ============================================================
+/* 
    MIF — Marketplace do Instituto Federal Goiano
    style.css — Estilos globais
-   ============================================================ */
+*/
 
 /* Reset básico */
 * {
@@ -49,9 +49,9 @@ img {
     display: block;
 }
 
-/* ============================================================
+/* 
    HEADER / NAVBAR
-   ============================================================ */
+*/
 header {
     background-color: var(--verde);
     color: var(--branco);
@@ -108,9 +108,9 @@ header .btn-anunciar:hover {
     text-decoration: none;
 }
 
-/* ============================================================
+/* 
    BARRA DE BUSCA (usada no header em algumas páginas)
-   ============================================================ */
+*/
 .barra-busca {
     display: flex;
     flex: 1;
@@ -143,18 +143,18 @@ header .btn-anunciar:hover {
     color: var(--branco);
 }
 
-/* ============================================================
+/* 
    CONTAINER PRINCIPAL
-   ============================================================ */
+*/
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 24px 16px;
 }
 
-/* ============================================================
+/* 
    BOTÕES GERAIS
-   ============================================================ */
+*/
 .btn {
     display: inline-block;
     padding: 10px 20px;
@@ -233,9 +233,9 @@ header .btn-anunciar:hover {
     text-align: center;
 }
 
-/* ============================================================
+/* 
    FORMULÁRIOS
-   ============================================================ */
+*/
 .form-grupo {
     margin-bottom: 18px;
 }
@@ -292,9 +292,9 @@ header .btn-anunciar:hover {
     flex: 1;
 }
 
-/* ============================================================
+/* 
    CARDS DE PRODUTO
-   ============================================================ */
+*/
 .grid-produtos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -371,9 +371,9 @@ header .btn-anunciar:hover {
     color: var(--cinza-texto);
 }
 
-/* ============================================================
+/* 
    SEÇÃO DE CATEGORIAS
-   ============================================================ */
+*/
 .categorias {
     display: flex;
     gap: 12px;
@@ -401,9 +401,9 @@ header .btn-anunciar:hover {
     text-decoration: none;
 }
 
-/* ============================================================
+/* 
    FILTROS LATERAIS
-   ============================================================ */
+*/
 .layout-com-filtro {
     display: flex;
     gap: 24px;
@@ -462,9 +462,9 @@ header .btn-anunciar:hover {
     min-width: 0;
 }
 
-/* ============================================================
+/* 
    AVALIAÇÕES / ESTRELAS
-   ============================================================ */
+*/
 .estrelas {
     color: #fbc02d;
     font-size: 1.1rem;
@@ -477,9 +477,9 @@ header .btn-anunciar:hover {
     margin-left: 6px;
 }
 
-/* ============================================================
+/* 
    CARD DE VENDEDOR (resumo)
-   ============================================================ */
+*/
 .card-vendedor-resumo {
     background-color: var(--branco);
     border: 1px solid var(--cinza-borda);
@@ -525,9 +525,9 @@ header .btn-anunciar:hover {
     color: var(--cinza-texto);
 }
 
-/* ============================================================
+/* 
    CAIXA CENTRALIZADA (login, cadastro)
-   ============================================================ */
+*/
 .caixa-central {
     max-width: 460px;
     margin: 48px auto;
@@ -550,9 +550,9 @@ header .btn-anunciar:hover {
     margin-bottom: 24px;
 }
 
-/* ============================================================
+/* 
    SEÇÃO DE TÍTULO DE PÁGINA
-   ============================================================ */
+*/
 .titulo-pagina {
     margin-bottom: 20px;
 }
@@ -568,9 +568,9 @@ header .btn-anunciar:hover {
     margin-top: 4px;
 }
 
-/* ============================================================
+/* 
    MENSAGENS DE ALERTA / FEEDBACK
-   ============================================================ */
+*/
 .alerta {
     padding: 12px 16px;
     border-radius: 4px;
@@ -582,9 +582,9 @@ header .btn-anunciar:hover {
 .alerta-erro    { background-color: #ffebee; color: #c62828; border-left: 4px solid var(--vermelho); }
 .alerta-info    { background-color: #e3f2fd; color: #1565c0; border-left: 4px solid #1565c0; }
 
-/* ============================================================
+/* 
    GALERIA DE FOTOS DO PRODUTO
-   ============================================================ */
+*/
 .galeria-produto {
     display: flex;
     gap: 10px;
@@ -632,9 +632,9 @@ header .btn-anunciar:hover {
     border-color: var(--verde);
 }
 
-/* ============================================================
+/* 
    LAYOUT DE DETALHE DE PRODUTO
-   ============================================================ */
+*/
 .layout-produto {
     display: flex;
     gap: 32px;
@@ -688,9 +688,9 @@ header .btn-anunciar:hover {
     width: 40%;
 }
 
-/* ============================================================
+/* 
    SEÇÃO DE AVALIAÇÕES
-   ============================================================ */
+*/
 .secao-avaliacoes {
     margin-top: 32px;
 }
@@ -735,9 +735,9 @@ header .btn-anunciar:hover {
     color: var(--cinza-texto);
 }
 
-/* ============================================================
+/* 
    PERFIL DO VENDEDOR (página completa)
-   ============================================================ */
+*/
 .perfil-vendedor-topo {
     background-color: var(--branco);
     border: 1px solid var(--cinza-borda);
@@ -796,9 +796,9 @@ header .btn-anunciar:hover {
     color: var(--cinza-texto);
 }
 
-/* ============================================================
+/* 
    TABS (abas)
-   ============================================================ */
+*/
 .tabs {
     display: flex;
     border-bottom: 2px solid var(--cinza-borda);
@@ -827,9 +827,9 @@ header .btn-anunciar:hover {
     border-bottom-color: var(--verde);
 }
 
-/* ============================================================
+/* 
    FOTO DE PERFIL (edição)
-   ============================================================ */
+*/
 .area-foto-perfil {
     display: flex;
     align-items: center;
@@ -856,9 +856,9 @@ header .btn-anunciar:hover {
     overflow: hidden;
 }
 
-/* ============================================================
+/* 
    BREADCRUMB
-   ============================================================ */
+*/
 .breadcrumb {
     font-size: 0.85rem;
     color: var(--cinza-texto);
@@ -873,9 +873,9 @@ header .btn-anunciar:hover {
     margin: 0 6px;
 }
 
-/* ============================================================
+/* 
    FOOTER
-   ============================================================ */
+*/
 footer {
     background-color: var(--verde);
     color: var(--branco);
@@ -893,9 +893,9 @@ footer a:hover {
     color: var(--branco);
 }
 
-/* ============================================================
+/* 
    UTILITÁRIOS
-   ============================================================ */
+*/
 .mt-8  { margin-top: 8px; }
 .mt-16 { margin-top: 16px; }
 .mt-24 { margin-top: 24px; }
@@ -921,9 +921,9 @@ footer a:hover {
     padding-bottom: 6px;
 }
 
-/* ============================================================
+/* 
    CLASSES ADICIONAIS (Substituindo estilos inline)
-   ============================================================ */
+*/
 
 /* Banner Hero (index.html) */
 .hero-banner {
@@ -1149,9 +1149,9 @@ footer a:hover {
     padding: 6px 0;
 }
 
-/* ============================================================
+/* 
    LÓGICA DE ABAS VIA CSS (:target) — SEM JAVASCRIPT
-   ============================================================ */
+*/
 
 /* Esconde todos os conteúdos de abas por padrão */
 .tab-content {
@@ -1181,9 +1181,9 @@ footer a:hover {
     border-bottom-color: var(--verde);
 }
 
-/* ============================================================
+/* 
    ESTILOS PARA ESTRUTURA COM IFRAME
-   ============================================================ */
+*/
 
 .main-wrapper {
     display: flex;
@@ -1209,9 +1209,9 @@ footer a:hover {
     background-color: var(--cinza-bg);
 }
 
-/* ============================================================
+/* 
    ESTILOS PARA ESTRUTURA COM IFRAME
-   ============================================================ */
+*/
 
 .iframe-container {
     width: 100%;

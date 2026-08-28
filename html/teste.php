@@ -2,19 +2,12 @@
 
 require_once 'conexao.php';
 require_once 'funcoes/funcoes.php'; 
-$quebra = PHP_SAPI === 'cli' ? PHP_EOL : '<br>';
 
-function verificarLogin(){
-    // return isset($_SESSION['usuario']);
-    if (!isset($_SESSION['usuario'])) {
-        header("Location: login.php");
-    exit;
-    }
-}
+verificarLogin();
 
-// =====================================================
+
 // USUÁRIO
-// =====================================================
+
 
 $nome = 'Usuario teste';
 $email = 'teste@teste.com';
@@ -25,98 +18,98 @@ $admin = '0';
 // A função enviada recebe 5 parâmetros. O campo admin possui valor padrão 0 no banco.
 $resultado = salvarUsuario($conexao, $nome, $email, $num, $matricula);
 if ($resultado) {
-    echo 'salvarUsuario: funcionou' . $quebra;
+    echo 'salvarUsuario: funcionou <br>';
 } else {
-    echo 'salvarUsuario: erro' . $quebra;
+    echo 'salvarUsuario: erro <br>';
 }
 
-$idusuario = $conexao->insert_id;
+$idusuario = mysqli_insert_id($conexao);
 
 $resultado = pesquisarUsuarioId($conexao, $idusuario);
 if ($resultado) {
-    echo 'pesquisarUsuarioId: funcionou' . $quebra;
+    echo 'pesquisarUsuarioId: funcionou <br>';
 } else {
-    echo 'pesquisarUsuarioId: erro' . $quebra;
+    echo 'pesquisarUsuarioId: erro <br>';
 }
 
 $resultado = pesquisarUsuarioMatricula($conexao, $matricula);
 if ($resultado) {
-    echo 'pesquisarUsuarioId: funcionou' . $quebra;
+    echo 'pesquisarUsuarioId: funcionou <br>';
 } else {
-    echo 'pesquisarUsuarioId: erro' . $quebra;
+    echo 'pesquisarUsuarioId: erro <br>';
 }
 
 
 $resultado = pesquisarUsuarioNome($conexao, $nome);
-if ($resultado && $resultado->num_rows > 0) {
-    echo 'pequisarUsuarioNome: funcionou' . $quebra;
+if ($resultado && mysqli_num_rows($resultado) > 0) {
+    echo 'pequisarUsuarioNome: funcionou <br>';
 } else {
-    echo 'pequisarUsuarioNome: erro' . $quebra;
+    echo 'pequisarUsuarioNome: erro <br>';
 }
 
 $resultado = listarUsuario($conexao);
 if (is_array($resultado)) {
-    echo 'listarUsuario: funcionou' . $quebra;
+    echo 'listarUsuario: funcionou <br>';
 } else {
-    echo 'listarUsuario: erro' . $quebra;
+    echo 'listarUsuario: erro <br>';
 }
 
 $nomeEditado = 'Usuario teste editado';
 $resultado = editarUsuario($conexao, $nomeEditado, $email, $num, $matricula, $idusuario);
 if ($resultado) {
-    echo 'editarUsuario: funcionou' . $quebra;
+    echo 'editarUsuario: funcionou <br>';
 } else {
-    echo 'editarUsuario: erro' . $quebra;
+    echo 'editarUsuario: erro <br>';
 }
 
-// =====================================================
-// CATEGORIA
-// =====================================================
 
-$nomeCategoria = 'Categoria teste ' . time();
+// CATEGORIA
+
+
+$nomeCategoria = 'Categoria teste ' ;
 
 $resultado = salvarCategoria($conexao, $nomeCategoria);
 if ($resultado) {
-    echo 'salvarCategoria: funcionou' . $quebra;
+    echo 'salvarCategoria: funcionou <br>';
 } else {
-    echo 'salvarCategoria: erro' . $quebra;
+    echo 'salvarCategoria: erro <br>';
 }
 
-$idcategoria = $conexao->insert_id;
+$idcategoria = mysqli_insert_id($conexao);
 
 $resultado = pesquisarCategoriaId($conexao, $idcategoria);
 if ($resultado) {
-    echo 'pesquisarCategoriaId: funcionou' . $quebra;
+    echo 'pesquisarCategoriaId: funcionou <br>';
 } else {
-    echo 'pesquisarCategoriaId: erro' . $quebra;
+    echo 'pesquisarCategoriaId: erro <br>';
 }
 
 $resultado = pesquisarCategoriaNome($conexao, $nomeCategoria);
-if ($resultado && $resultado->num_rows > 0) {
-    echo 'pesquisarCategoriaNome: funcionou' . $quebra;
+if ($resultado && mysqli_num_rows($resultado) > 0) {
+    echo 'pesquisarCategoriaNome: funcionou <br>';
 } else {
-    echo 'pesquisarCategoriaNome: erro' . $quebra;
+    echo 'pesquisarCategoriaNome: erro <br>';
 }
 
 $resultado = listarCategorias($conexao);
 if (is_array($resultado)) {
-    echo 'listarCategorias: funcionou' . $quebra;
+    echo 'listarCategorias: funcionou <br>';
 } else {
-    echo 'listarCategorias: erro' . $quebra;
+    echo 'listarCategorias: erro <br>';
 }
 
 $resultado = editarCategoria($conexao, $nomeCategoria . ' editada', $idcategoria);
 if ($resultado) {
-    echo 'editarCategoria: funcionou' . $quebra;
+    echo 'editarCategoria: funcionou <br>';
 } else {
-    echo 'editarCategoria: erro' . $quebra;
+    echo 'editarCategoria: erro <br>';
 }
 
-// =====================================================
-// ANÚNCIO
-// =====================================================
 
-$titulo = 'Anuncio teste ' . time();
+// ANÚNCIO
+
+
+$titulo = 'Anuncio teste ' ;
 $descricao = 'Descricao do anuncio de teste';
 $estado = 'Bom';
 $tipo = 'Venda';
@@ -139,100 +132,100 @@ $resultado = salvarAnuncio(
     $idusuario
 );
 if ($resultado) {
-    echo 'salvarAnuncio: funcionou' . $quebra;
+    echo 'salvarAnuncio: funcionou <br>';
 } else {
-    echo 'salvarAnuncio: erro' . $quebra;
+    echo 'salvarAnuncio: erro <br>';
 }
 
-$idanuncio = $conexao->insert_id;
+$idanuncio = mysqli_insert_id($conexao);
 
 $resultado = pesquisarAnuncioId($conexao, $idanuncio);
 if ($resultado) {
-    echo 'pesquisarAnuncioId: funcionou' . $quebra;
+    echo 'pesquisarAnuncioId: funcionou <br>';
 } else {
-    echo 'pesquisarAnuncioId: erro' . $quebra;
+    echo 'pesquisarAnuncioId: erro <br>';
 }
 
 $resultado = listarAnuncios($conexao);
 if (is_array($resultado)) {
-    echo 'listarAnuncios: funcionou' . $quebra;
+    echo 'listarAnuncios: funcionou <br>';
 } else {
-    echo 'listarAnuncios: erro' . $quebra;
+    echo 'listarAnuncios: erro <br>';
 }
 
-// =====================================================
+
 // FAVORITO
-// =====================================================
+
 
 $resultado = salvarFavorito($conexao, $idusuario, $idanuncio);
 if ($resultado) {
-    echo 'salvarFavorito: funcionou' . $quebra;
+    echo 'salvarFavorito: funcionou <br>';
 } else {
-    echo 'salvarFavorito: erro' . $quebra;
+    echo 'salvarFavorito: erro <br>';
 }
 
 $resultado = pesquisarFavoritoId($conexao, $idusuario, $idanuncio);
 if ($resultado) {
-    echo 'pesquisarFavoritoId: funcionou' . $quebra;
+    echo 'pesquisarFavoritoId: funcionou <br>';
 } else {
-    echo 'pesquisarFavoritoId: erro' . $quebra;
+    echo 'pesquisarFavoritoId: erro <br>';
 }
 
 $resultado = listarFavoritos($conexao);
 if (is_array($resultado)) {
-    echo 'listarFavoritos: funcionou' . $quebra;
+    echo 'listarFavoritos: funcionou <br>';
 } else {
-    echo 'listarFavoritos: erro' . $quebra;
+    echo 'listarFavoritos: erro <br>';
 }
 
 $resultado = deletarFavorito($conexao, $idusuario, $idanuncio);
 if ($resultado) {
-    echo 'deletarFavorito: funcionou' . $quebra;
+    echo 'deletarFavorito: funcionou <br>';
 } else {
-    echo 'deletarFavorito: erro' . $quebra;
+    echo 'deletarFavorito: erro <br>';
 }
 
-// =====================================================
+
 // IMAGEM
-// =====================================================
+
 
 $resultado = listarImagem($conexao);
 if (is_array($resultado)) {
-    echo 'listarImagem: funcionou' . $quebra;
+    echo 'listarImagem: funcionou <br>';
 } else {
-    echo 'listarImagem: erro' . $quebra;
+    echo 'listarImagem: erro <br>';
 }
 
 $resultado = pesquisarImagemId($conexao, 999999);
 if ($resultado === null) {
-    echo 'pesquisarImagemId: funcionou' . $quebra;
+    echo 'pesquisarImagemId: funcionou <br>';
 } else {
-    echo 'pesquisarImagemId: erro' . $quebra;
+    echo 'pesquisarImagemId: erro <br>';
 }
 
-// =====================================================
+
 // EXCLUSÃO DOS DADOS CRIADOS PELO TESTE
-// =====================================================
+
 
 $resultado = deletarAnuncio($conexao, $idanuncio);
 if ($resultado) {
-    echo 'deletarAnuncio: funcionou' . $quebra;
+    echo 'deletarAnuncio: funcionou <br>';
 } else {
-    echo 'deletarAnuncio: erro' . $quebra;
+    echo 'deletarAnuncio: erro <br>';
 }
 
 $resultado = deletarCategoria($conexao, $idcategoria);
 if ($resultado) {
-    echo 'deletarCategoria: funcionou' . $quebra;
+    echo 'deletarCategoria: funcionou <br>';
 } else {
-    echo 'deletarCategoria: erro' . $quebra;
+    echo 'deletarCategoria: erro <br>';
 }
 
 $resultado = deletarUsuario($conexao, $idusuario);
 if ($resultado) {
-    echo 'deletarUsuario: funcionou' . $quebra;
+    echo 'deletarUsuario: funcionou <br>';
 } else {
-    echo 'deletarUsuario: erro' . $quebra;
+    echo 'deletarUsuario: erro <br>';
 }
 
 ?>

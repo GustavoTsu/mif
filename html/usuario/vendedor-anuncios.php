@@ -1,9 +1,14 @@
+<?php
+session_start();
+require_once "funcoes/funcoes.php";
+verificarLogin();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Anúncios do Vendedor</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body class="iframe-body" style="background: #fff; padding: 20px;">
     <div class="categorias mb-16">
@@ -12,7 +17,7 @@
         <a href="#" class="categoria-item">Aluguel</a>
     </div>
     <div class="grid-produtos">
-        <a href="produto.html" target="_parent" class="card-produto">
+        <a href="/produto/produto.html" target="_parent" class="card-produto">
             <div class="foto-placeholder">Sem foto</div>
             <div class="info-card">
                 <span class="tipo-badge badge-venda">Venda</span>

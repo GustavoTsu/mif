@@ -4,10 +4,12 @@ require_once __DIR__ . '/../conexao.php';
 function verificarLogin(){
     // return isset($_SESSION['usuario']);
     if (!isset($_SESSION['usuario'])) {
-        header("Location: login.php");
+        header("Location: /login/login.php");
     exit;
     }
 }
+
+
 
 function verificarAdmin()
 {

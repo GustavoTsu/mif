@@ -1,7 +1,7 @@
 <?php
     session_start();
-    require_once "funcoes/funcoes.php";
-    require_once "conexao.php";
+    require_once "../funcoes/funcoes.php";
+    require_once "../conexao.php";
 
 
     if (!empty($_POST['matriculaUsuario']) && !empty($_POST['senhaUsuario'])) {
@@ -40,21 +40,21 @@
                 $_SESSION['senha'] = $_POST['senhaUsuario'];
                 
 
-                header("Location: index.php?login=deucerto"); // Redirecionar para a página principal
+                header("Location: /funcoes/crawlerSUAP.php"); // Redirecionar para a página principal
                 exit;
             } else {
-                header("Location: index.php?msg=Ocorreu um erro durante a autenticação no SUAP.");
+                header("Location: /index.php?msg=Ocorreu um erro durante a autenticação no SUAP.");
                 exit;
             }
         } else if ($httpCode == 401) {
-            header("Location: index.php?msg=Usuário ou senha incorretos.");
+            header("Location: /index.php?msg=Usuário ou senha incorretos.");
             exit;
         } else {
-            header("Location: index.php?msg=Ocorreu um erro interno do SUAP ao processar o login.");
+            header("Location: /index.php?msg=Ocorreu um erro interno do SUAP ao processar o login.");
             exit;
         }
     } else {
-        header("Location: index.php?msg=Informe os dados de acesso.");
+        header("Location: /index.php?msg=Informe os dados de acesso.");
         exit;
     }
 ?>

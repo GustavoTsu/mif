@@ -1,22 +1,26 @@
+<?php
+session_start();
+require_once "funcoes/funcoes.php";
+verificarLogin();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>João Silva — Perfil — MIF</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
 <header>
-    <a href="index.html" class="logo">M<span>IF</span></a>
+    <a href="/index.html" class="logo">M<span>IF</span></a>
     <div class="barra-busca">
         <input type="text" placeholder="Buscar produtos...">
         <button type="button">Buscar</button>
     </div>
     <nav>
-        <a href="login.html">Entrar</a>
-        <a href="cadastro-produto.html" class="btn-anunciar">+ Anunciar</a>
+        <a href="/produto/cadastro-produto.html" class="btn-anunciar">+ Anunciar</a>
     </nav>
 </header>
 
@@ -37,7 +41,6 @@
         </div>
 
         <div class="flex flex-column gap-10 align-end">
-            <a href="produto.html#chat" class="btn btn-verde">Enviar mensagem</a>
             <div class="text-xsmall text-cinza text-right">WhatsApp: (64) 99999-9999</div>
         </div>
     </div>

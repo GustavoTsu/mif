@@ -1,9 +1,14 @@
+<?php
+session_start();
+require_once "funcoes/funcoes.php";
+verificarLogin();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Dados do Perfil</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body class="iframe-body" style="background: #fff; padding: 20px;">
     <form action="#" method="POST" enctype="multipart/form-data">
