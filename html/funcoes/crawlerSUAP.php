@@ -289,9 +289,9 @@ function consultarTelefoneEstudante(string $matriculaEstudante): ?string
 $nome = consultarNomeEstudante($matriculaEstudante);
 $email = consultarEmailEstudante($matriculaEstudante);
 $telefone = consultarTelefoneEstudante($matriculaEstudante);
-
 $telefone = str_replace(" ", "", $telefone); // diminui a quantidade de caracteres do telefone para caber no banco
 
 salvarUsuario($conexao, $nome, $email, $telefone, $matriculaEstudante);
 header("Location: ../index.php");
+exit;   
 ?>
