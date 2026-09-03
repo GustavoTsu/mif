@@ -6,7 +6,7 @@ namespace PhpOffice\PhpSpreadsheet\Style;
  * Class to handle tint applied to color.
  * Code borrows heavily from some Python projects.
  *
- * @see https://docs.python.org/3/library/colorsys.html
+ * @see https://docs.python.org/3/library/colorsys.php
  * @see https://gist.github.com/Mike-Honey/b36e651e9a7f1d2e1d60ce1c63b9b633
  */
 class RgbTint
@@ -143,7 +143,7 @@ class RgbTint
     /**
      * Tints HLSMAX based luminance.
      *
-     * @see http://ciintelligence.blogspot.co.uk/2012/02/converting-excel-theme-color-and-tint.html
+     * @see http://ciintelligence.blogspot.co.uk/2012/02/converting-excel-theme-color-and-tint.php
      */
     private static function tintLuminance(float $tint, float $luminance): int
     {

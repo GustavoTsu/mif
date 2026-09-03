@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaleco de laboratório M — MIF</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
 <header>
-    <a href="index.html" class="logo">M<span>IF</span></a>
+    <a href="index.php" class="logo">M<span>IF</span></a>
     <div class="barra-busca">
         <input type="text" placeholder="Buscar produtos...">
         <button type="button">Buscar</button>
     </div>
     <nav>
-        <a href="login.html">Entrar</a>
-        <a href="cadastro-produto.html" class="btn-anunciar">+ Anunciar</a>
+        <a href="login.php">Entrar</a>
+        <a href="cadastro-produto.php" class="btn-anunciar">+ Anunciar</a>
     </nav>
 </header>
 
@@ -51,11 +51,11 @@
                     <tr><td>Publicado em</td><td>01/04/2025</td></tr>
                     <tr><td>Código do anúncio</td><td>#<!-- BANCO: produto.id --></td></tr>
                 </table>
-                <a href="vendedor.html?id=1" class="btn btn-outline btn-bloco">Ver perfil do vendedor</a>
+                <a href="vendedor.php?id=1" class="btn btn-outline btn-bloco">Ver perfil do vendedor</a>
 
                 <?php
                 if(1 == 1) {
-                echo '<a <p style="margin: 10px 0px;" href="vendedor.html?id=1" class="btn btn-outline-vermelho btn-bloco">Encerrar</a>  ';
+                echo '<a <p style="margin: 10px 0px;" href="vendedor.php?id=1" class="btn btn-outline-vermelho btn-bloco">Encerrar</a>  ';
                 } else {
                     echo "<p style='color:red;'>botão encerrar caso vc seja dono do anúncio</p>";
                 }
@@ -71,18 +71,18 @@
         <div class="avatar-placeholder">J</div>
         <div>
             <div class="nome-vendedor">
-                <a href="vendedor.html?id=1">João Silva</a>
+                <a href="vendedor.php?id=1">João Silva</a>
             </div>
         </div>
         <div class="ml-auto">
-            <a href="vendedor.html?id=1" class="btn btn-outline">Ver perfil</a>
+            <a href="vendedor.php?id=1" class="btn btn-outline">Ver perfil</a>
         </div>
     </div>
 
     <hr class="divider">
     <h2 class="secao-titulo">Mais anúncios deste vendedor</h2>
     <div class="grid-produtos">
-        <a href="produto.html" class="card-produto">
+        <a href="produto.php" class="card-produto">
             <div class="foto-placeholder">Sem foto</div>
             <div class="info-card">
                 <span class="tipo-badge badge-venda">Venda</span>

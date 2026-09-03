@@ -314,7 +314,7 @@ class XlsBase extends BaseReader
             $value = $rknum >> 2;
         } else {
             // changes by mmp, info on IEEE754 encoding from
-            // research.microsoft.com/~hollasch/cgindex/coding/ieeefloat.html
+            // research.microsoft.com/~hollasch/cgindex/coding/ieeefloat.php
             // The RK format calls for using only the most significant 30 bits
             // of the 64 bit floating point value. The other 34 bits are assumed
             // to be 0 so we use the upper 30 bits of $rknum as follows...

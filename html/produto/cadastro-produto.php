@@ -9,10 +9,10 @@
 <body>
 
 <header>
-    <a href="index.html" class="logo">M<span>IF</span></a>
+    <a href="index.php" class="logo">M<span>IF</span></a>
     <nav>
-        <a href="vendedor.html?id=1">João Silva</a>
-        <a href="index.html">Início</a>
+        <a href="vendedor.php?id=1">João Silva</a>
+        <a href="index.php">Início</a>
     </nav>
 </header>
 
@@ -129,7 +129,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-verde btn-bloco mt-8">Publicar anúncio</button>
-                    <a href="index.html" class="btn btn-outline btn-bloco mt-8">Cancelar</a>
+                    <a href="index.php" class="btn btn-outline btn-bloco mt-8">Cancelar</a>
                 </div>
             </div>
         </div>

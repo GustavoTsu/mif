@@ -68,7 +68,7 @@ DiDom allows to load HTML in several ways:
 $document = new Document($html);
 
 // file path
-$document = new Document('page.html', true);
+$document = new Document('page.php', true);
 
 // or URL
 $document = new Document('http://www.example.com/', true);
@@ -97,7 +97,7 @@ $document = new Document();
 
 $document->loadHtml($html);
 
-$document->loadHtmlFile('page.html');
+$document->loadHtmlFile('page.php');
 
 $document->loadHtmlFile('http://www.example.com/');
 ```

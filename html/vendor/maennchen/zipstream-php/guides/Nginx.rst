@@ -10,7 +10,7 @@ So you'll want to disable this with a custom header:
     $response->headers->set('X-Accel-Buffering', 'no');
 
 Alternatively, you can tweak the
-`fastcgi cache parameters <https://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_buffers>`_
+`fastcgi cache parameters <https://nginx.org/en/docs/http/ngx_http_fastcgi_module.php#fastcgi_buffers>`_
 within nginx config.
 
 See `original issue <https://github.com/maennchen/ZipStream-PHP/issues/77>`_.

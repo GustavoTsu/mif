@@ -22,7 +22,7 @@ class YearFrac
      *
      * Excel Function:
      *        YEARFRAC(startDate,endDate[,method])
-     * See https://lists.oasis-open.org/archives/office-formula/200806/msg00039.html
+     * See https://lists.oasis-open.org/archives/office-formula/200806/msg00039.php
      *     for description of algorithm used in Excel
      *
      * @param mixed $startDate Excel date serial value (float), PHP date timestamp (integer),

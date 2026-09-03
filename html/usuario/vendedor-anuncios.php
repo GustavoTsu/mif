@@ -17,7 +17,7 @@ verificarLogin();
         <a href="#" class="categoria-item">Aluguel</a>
     </div>
     <div class="grid-produtos">
-        <a href="/produto/produto.html" target="_parent" class="card-produto">
+        <a href="/produto/produto.php" target="_parent" class="card-produto">
             <div class="foto-placeholder">Sem foto</div>
             <div class="info-card">
                 <span class="tipo-badge badge-venda">Venda</span>

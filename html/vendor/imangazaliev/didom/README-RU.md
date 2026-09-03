@@ -69,7 +69,7 @@ DiDom позволяет загрузить HTML несколькими спос
 $document = new Document($html);
 
 // путь к файлу
-$document = new Document('page.html', true);
+$document = new Document('page.php', true);
 
 // или URL
 $document = new Document('http://www.example.com/', true);
@@ -98,7 +98,7 @@ $document = new Document();
 
 $document->loadHtml($html);
 
-$document->loadHtmlFile('page.html');
+$document->loadHtmlFile('page.php');
 
 $document->loadHtmlFile('http://www.example.com/');
 ```

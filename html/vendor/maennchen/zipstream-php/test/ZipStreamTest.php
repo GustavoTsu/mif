@@ -92,7 +92,7 @@ class ZipStreamTest extends TestCase
         $content = 'any';
         $comment = mb_convert_encoding('á', 'ISO-8859-2', 'UTF-8');
 
-        // @see https://libzip.org/documentation/zip_file_get_comment.html
+        // @see https://libzip.org/documentation/zip_file_get_comment.php
         //
         // mb_convert_encoding hasn't CP437.
         // nearly CP850 (DOS-Latin-1)

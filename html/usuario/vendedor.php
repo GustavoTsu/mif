@@ -14,13 +14,13 @@ verificarLogin();
 <body>
 
 <header>
-    <a href="/index.html" class="logo">M<span>IF</span></a>
+    <a href="/index.php" class="logo">M<span>IF</span></a>
     <div class="barra-busca">
         <input type="text" placeholder="Buscar produtos...">
         <button type="button">Buscar</button>
     </div>
     <nav>
-        <a href="/produto/cadastro-produto.html" class="btn-anunciar">+ Anunciar</a>
+        <a href="/produto/cadastro-produto.php" class="btn-anunciar">+ Anunciar</a>
     </nav>
 </header>
 
@@ -47,11 +47,11 @@ verificarLogin();
 
     <!-- ABAS QUE CONTROLAM O IFRAME -->
     <div class="tabs-iframe">
-        <a href="vendedor-anuncios.html" target="vendedor-iframe" class="tab-item">Anúncios <span class="badge-count">3</span></a>
+        <a href="vendedor-anuncios.php" target="vendedor-iframe" class="tab-item">Anúncios <span class="badge-count">3</span></a>
     </div>
 
     <!-- IFRAME CENTRALIZADO -->
-    <iframe name="vendedor-iframe" src="vendedor-anuncios.html" class="iframe-container" style="height: 600px;"></iframe>
+    <iframe name="vendedor-iframe" src="vendedor-anuncios.php" class="iframe-container" style="height: 600px;"></iframe>
 
 </div>
 

@@ -96,10 +96,10 @@ required for locally stored files on you server you intend to stream via
 ``ZipStream``.
 
 See official Symfony documentation for details on
-`Symfony's StreamedResponse <https://symfony.com/doc/current/components/http_foundation.html#streaming-a-response>`_ 
+`Symfony's StreamedResponse <https://symfony.com/doc/current/components/http_foundation.php#streaming-a-response>`_ 
 ``Symfony\Component\HttpFoundation\StreamedResponse``.
 
-Note from `S3 documentation <https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-stream-wrapper.html>`_:
+Note from `S3 documentation <https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/s3-stream-wrapper.php>`_:
 
     Streams opened in "r" mode only allow data to be read from the stream, and
     are not seekable by default. This is so that data can be downloaded from

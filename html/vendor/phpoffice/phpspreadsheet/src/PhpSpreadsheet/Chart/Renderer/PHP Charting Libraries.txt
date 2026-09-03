@@ -1,5 +1,5 @@
 ChartDirector
-	https://www.advsofteng.com/cdphp.html
+	https://www.advsofteng.com/cdphp.php
 
 GraPHPite
 	http://graphpite.sourceforge.net/

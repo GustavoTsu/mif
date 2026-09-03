@@ -11,9 +11,9 @@
 <body>
 
     <header>
-        <a href="index.html" class="logo">M<span>IF</span></a>
+        <a href="index.php" class="logo">M<span>IF</span></a>
         <nav>
-            <a href="index.html">Voltar ao início</a>
+            <a href="index.php">Voltar ao início</a>
         </nav>
     </header>
 

@@ -16,7 +16,7 @@ verificarLogin();
 <body>
 
 <header>
-    <a href="index.html" class="logo">M<span>IF</span></a>
+    <a href="index.php" class="logo">M<span>IF</span></a>
     <div class="barra-busca">
         <input type="text" placeholder="Buscar produtos, jalecos, livros...">
         <button type="button">Buscar</button>
@@ -38,14 +38,14 @@ verificarLogin();
     </div>
 
     <div class="categorias">
-        <a href="index.html?categoria=todos" class="categoria-item ativa">Todos</a>
-        <a href="index.html?categoria=jalecos" class="categoria-item">Jalecos</a>
-        <a href="index.html?categoria=uniformes" class="categoria-item">Uniformes</a>
-        <a href="index.html?categoria=livros" class="categoria-item">Livros</a>
-        <a href="index.html?categoria=eletronicos" class="categoria-item">Eletrônicos</a>
-        <a href="index.html?categoria=informatica" class="categoria-item">Informática</a>
-        <a href="index.html?categoria=esportes" class="categoria-item">Esportes</a>
-        <a href="index.html?categoria=outros" class="categoria-item">Outros</a>
+        <a href="index.php?categoria=todos" class="categoria-item ativa">Todos</a>
+        <a href="index.php?categoria=jalecos" class="categoria-item">Jalecos</a>
+        <a href="index.php?categoria=uniformes" class="categoria-item">Uniformes</a>
+        <a href="index.php?categoria=livros" class="categoria-item">Livros</a>
+        <a href="index.php?categoria=eletronicos" class="categoria-item">Eletrônicos</a>
+        <a href="index.php?categoria=informatica" class="categoria-item">Informática</a>
+        <a href="index.php?categoria=esportes" class="categoria-item">Esportes</a>
+        <a href="index.php?categoria=outros" class="categoria-item">Outros</a>
     </div>
 
     <div class="layout-com-filtro mt-16">
