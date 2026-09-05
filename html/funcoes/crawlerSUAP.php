@@ -8,13 +8,13 @@ require_once __DIR__ . '/../conexao.php';
 
 $matriculaEstudante = $_SESSION['usuario'] ?? null;
 if ($matriculaEstudante == null) {
-    header("Location: ../login/login.php");
+    header("Location: /login/login.php");
     exit();
  }
 
 $usuario = pesquisarUsuarioMatricula($conexao, $matriculaEstudante);
 if ($usuario) {
-    header("Location: ../index.php");
+    header("Location: /index.php");
     exit();
  }
 

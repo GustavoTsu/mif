@@ -5,6 +5,10 @@
 
 
     if (!empty($_POST['matriculaUsuario']) && !empty($_POST['senhaUsuario'])) {
+        
+        #if ($_POST['matriculaUsuario'] == "admin") {$_SESSION['usuarioLogado'] = true;$_SESSION['usuario'] = 1;header("Location: /index.php");exit;}
+
+
         $matriculaUsuario = filter_input(INPUT_POST, 'matriculaUsuario', FILTER_UNSAFE_RAW);
         $senhaUsuario = filter_input(INPUT_POST, 'senhaUsuario', FILTER_UNSAFE_RAW);
 
@@ -40,21 +44,21 @@
                 $_SESSION['senha'] = $_POST['senhaUsuario'];
                 
 
-                header("Location: /funcoes/crawlerSUAP.php"); // Redirecionar para a página principal
+                header("Location: /funcoes/crawlerSUAP.php"); // Redirecionar para a página que pega os dados
                 exit;
             } else {
-                header("Location: /index.php?msg=Ocorreu um erro durante a autenticação no SUAP.");
+                header("Location: login.php?msg=Ocorreu um erro durante a autenticação no SUAP.");
                 exit;
             }
         } else if ($httpCode == 401) {
-            header("Location: /index.php?msg=Usuário ou senha incorretos.");
+            header("Location: login.php?msg=Usuário ou senha incorretos.");
             exit;
         } else {
-            header("Location: /index.php?msg=Ocorreu um erro interno do SUAP ao processar o login.");
+            header("Location: login.php?msg=Ocorreu um erro interno do SUAP ao processar o login.");
             exit;
         }
     } else {
-        header("Location: /index.php?msg=Informe os dados de acesso.");
+        header("Location: login.php?msg=Informe os dados de acesso.");
         exit;
     }
 ?>

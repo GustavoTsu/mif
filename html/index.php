@@ -2,6 +2,8 @@
 session_start();
 require_once "funcoes/funcoes.php";
 verificarLogin();
+
+$anuncios = listarAnuncios($conexao);
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +20,7 @@ verificarLogin();
 <header>
     <a href="index.php" class="logo">M<span>IF</span></a>
     <div class="barra-busca">
-        <input type="text" placeholder="Buscar produtos, jalecos, livros...">
+        <input type="text" placeholder="Buscar produtos">
         <button type="button">Buscar</button>
     </div>
     <nav>
@@ -96,40 +98,26 @@ verificarLogin();
             <button class="btn btn-outline btn-bloco mt-8" type="button">Limpar filtros</button>
         </aside>
 
+
         <div class="area-resultados">
-            <p class="text-cinza text-small mb-16">
-                Exibindo <strong><!-- BANCO: total_resultados --></strong> anúncios
-            </p>
+            <div class="mt-24 text-center">
+                <?php
+                    barraNavegacao($anuncios)
+                ?>
+            </div>
 
             <div class="grid-produtos">
-                <!-- INÍCIO: repetir este bloco para cada produto -->
-                <a href="produto/produto.php?id= <!-- BANCO: produto.id --!>" class="card-produto">
-                    <div class="foto-placeholder">Sem foto</div>
-                    <div class="info-card">
-                        <span class="tipo-badge badge-venda"><!-- BANCO: produto.tipo --></span>
-                        <div class="titulo-card"><!-- BANCO: produto.titulo --></div>
-                        <div class="preco-card">R$ <!-- BANCO: produto.preco --></div>
-                        <div class="campus-card"><!-- BANCO: usuario.campus --></div>
-                    </div>
-                </a>
-                <!-- FIM: repetição de produto -->
-
-                <a href="produto/produto.php" class="card-produto">
-                    <div class="foto-placeholder">Sem foto</div>
-                    <div class="info-card">
-                        <span class="tipo-badge badge-venda">Venda</span>
-                        <div class="titulo-card">Jaleco de laboratório M</div>
-                        <div class="preco-card">R$ 35,00</div>
-                        <div class="campus-card">Campus Morrinhos</div>
-                    </div>
-                </a>
+                <?php
+                    Anunciosformatados($conexao, $anuncios)
+                ?>
             </div>
 
             <div class="mt-24 text-center">
-                <a href="?pagina=1" class="btn btn-outline">1</a>
-                <a href="?pagina=2" class="btn btn-verde">2</a>
-                <a href="?pagina=3" class="btn btn-outline">3</a>
+                <?php
+                    barraNavegacao($anuncios)
+                ?>
             </div>
+
         </div>
     </div>
 </div>

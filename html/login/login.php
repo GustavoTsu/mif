@@ -24,24 +24,39 @@
             <p class="subtitulo">Use sua matrícula e senha do IF Goiano</p>
             <form action="loginSUAP.php" method="POST">
                 <div class="form-grupo">
-                    <label for="matriculaUsuario">Matrícula</label>
-                    <input type="matricula" id="matriculaUsuario" name="matriculaUsuario" placeholder="Sua matrícula"
+                    <label>Matrícula</label>
+                    <input type="text" id="matriculaUsuario" name="matriculaUsuario" placeholder="Sua matrícula"
                         required>
                 </div>
                 <div class="form-grupo">
-                    <label for="senhaUsuario">Senha</label>
+                    <label>Senha</label>
                     <input type="password" id="senhaUsuario" name="senhaUsuario" placeholder="Sua senha" required>
+                    <label>
+                                <input type="checkbox" id="mostrar-senha"/>
+                                <span>Mostrar senha</span>    
+                    </label> 
                 </div>
                 <button type="submit" class="btn btn-verde btn-bloco">Entrar</button>
             </form>
         </div>
 
     </div>
-    </div>
 
     <footer>
         <p>MIF &mdash; Marketplace do Instituto Federal Goiano &copy; 2025</p>
     </footer>
+
+    <script>
+        let btn = document.getElementById("mostrar-senha")
+        btn.addEventListener('click', function () {
+            let input = document.getElementById('senhaUsuario')
+            if (input.getAttribute('type') == 'password') {
+            input.setAttribute('type', 'text')
+            } else {
+            input.setAttribute('type', 'password')
+            }
+        })
+</script>
 
 </body>
 

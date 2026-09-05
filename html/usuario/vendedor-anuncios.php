@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "funcoes/funcoes.php";
+require_once "../funcoes/funcoes.php";
 verificarLogin();
 ?>
 <!DOCTYPE html>
