@@ -15,10 +15,10 @@ verificarLogin();
 
 <header>
     <a href="/index.php" class="logo">M<span>IF</span></a>
-    <div class="barra-busca">
-        <input type="text" placeholder="Buscar produtos...">
-        <button type="button">Buscar</button>
-    </div>
+    <form id="formbusca" class="barra-busca" action="/index.php" method="GET">
+        <input id="busca" name="busca" type="text" placeholder="Buscar produtos">
+        <button type="submit">Buscar</button>
+    </form>
     <nav>
         <a href="/produto/cadastro-produto.php" class="btn-anunciar">+ Anunciar</a>
     </nav>

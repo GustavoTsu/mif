@@ -2,6 +2,7 @@
 session_start();
 require_once "../funcoes/funcoes.php";
 verificarLogin();
+$anuncios = filtrarAnuncios($conexao, "id_anunciante", $idusuario);
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -16,15 +17,24 @@ verificarLogin();
         <a href="#" class="categoria-item">Venda</a>
         <a href="#" class="categoria-item">Aluguel</a>
     </div>
-    <div class="grid-produtos">
-        <a href="/produto/produto.php" target="_parent" class="card-produto">
-            <div class="foto-placeholder">Sem foto</div>
-            <div class="info-card">
-                <span class="tipo-badge badge-venda">Venda</span>
-                <div class="titulo-card">Jaleco de laboratório M</div>
-                <div class="preco-card">R$ 35,00</div>
+        <div class="area-resultados">
+            <div class="mt-24 text-center">
+                <?php
+                    barraNavegacao($anuncios)
+                ?>
             </div>
-        </a>
-    </div>
+
+            <div class="grid-produtos">
+                <?php
+                    Anunciosformatados($conexao, $anuncios)
+                ?>
+            </div>
+
+            <div class="mt-24 text-center">
+                <?php
+                    barraNavegacao($anuncios)
+                ?>
+            </div>
+        </div>
 </body>
 </html>

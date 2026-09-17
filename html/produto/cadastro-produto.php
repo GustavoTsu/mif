@@ -1,3 +1,137 @@
+<?php
+session_start();
+require_once "../funcoes/funcoes.php";
+verificarLogin();
+
+if (!empty($_POST)) {
+
+    $tipos_permitidos   = ['venda', 'aluguel', 'troca'];
+    $estados_permitidos = ['novo', 'seminovo', 'usado'];
+    $status_permitidos  = ['ativo', 'pausado', 'encerrado'];
+
+    $titulo = '';
+    if (isset($_POST['titulo'])) {
+        $titulo = trim($_POST['titulo']);
+    }
+
+    $descricao = '';
+    if (isset($_POST['descricao'])) {
+        $descricao = trim($_POST['descricao']);
+    }
+
+    $idcategoria = 0;
+    if (isset($_POST['categoria'])) {
+        $idcategoria = intval($_POST['categoria']);
+    }
+
+    $estado = '';
+    if (isset($_POST['estado'])) {
+        $estado = trim($_POST['estado']);
+    }
+
+    $tipo = '';
+    if (isset($_POST['tipo'])) {
+        $tipo = trim($_POST['tipo']);
+    }
+
+    $preco = 0.00;
+    if (isset($_POST['preco']) && $_POST['preco'] !== '') {
+        $preco = floatval($_POST['preco']);
+    }
+
+    $status = 'ativo';
+    if (isset($_POST['status'])) {
+        $status = trim($_POST['status']);
+    }
+
+    $periodoaluguel = '';
+    if (isset($_POST['periodo_aluguel'])) {
+        $periodoaluguel = trim($_POST['periodo_aluguel']);
+    }
+
+    $troca = '';
+    if (isset($_POST['detalhes_troca'])) {
+        $troca = trim($_POST['detalhes_troca']);
+    }
+
+    $matriculaUsuario = $_SESSION['usuario'];
+    $usuario = pesquisarUsuarioMatricula($conexao, $matriculaUsuario);
+    $idusuario = $usuario["idusuario"];
+
+    if (!in_array($tipo, $tipos_permitidos)) {
+        header("Location: cadastrar_produto.php?e=invalid_tipo");
+        exit;
+    }
+
+    if (!in_array($estado, $estados_permitidos)) {
+        header("Location: cadastrar_produto.php?e=invalid_estado");
+        exit;
+    }
+
+    if (!in_array($status, $status_permitidos)) {
+        header("Location: cadastrar_produto.php?e=invalid_status");
+        exit;
+    }
+
+    // 4. Validação do Preço (impede valores negativos)
+    if ($preco < 0) {
+        header("Location: cadastrar_produto.php?e=invalid_preco");
+        exit;
+    }
+
+    // 5. Validação de presença dos campos obrigatórios
+    if ($titulo == "" || $descricao == "" || $idcategoria == 0 || $estado == "" || $tipo == "") {
+        header("Location: cadastrar_produto.php?e=1");
+        exit;
+    }
+
+    if (strlen($titulo) > 45) {
+        header("Location: cadastrar_produto.php?e=2");
+        exit;
+    }
+
+    // 6. Salvamento dos dados validados
+    $salvou = salvarAnuncio(
+        $conexao, 
+        $titulo, 
+        $descricao, 
+        $estado, 
+        $tipo, 
+        $preco, 
+        $periodoaluguel, 
+        $troca, 
+        $idcategoria, 
+        $status, 
+        $idusuario
+    );
+
+    if ($salvou) {
+        $idanuncio = mysqli_insert_id($conexao);
+    if (isset($_FILES['fotos'])) {
+            if (!empty($_FILES['fotos']['name'][0])) {
+                $totalArquivos = count($_FILES['fotos']['name']);
+                $i = 0;
+
+                while ($i < $totalArquivos) {
+                    $arquivo = [
+                        'name'     => $_FILES['fotos']['name'][$i],
+                        'tmp_name' => $_FILES['fotos']['tmp_name'][$i],
+                        'error'    => $_FILES['fotos']['error'][$i],
+                        'size'     => $_FILES['fotos']['size'][$i]
+                    ];
+
+                    salvarImagem($conexao, $arquivo, $idanuncio);
+                    $i++;
+                }
+            }
+        }
+
+        header("Location: /index.php");
+        exit;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -23,7 +157,7 @@
         <p>Preencha as informações do item que deseja vender, alugar ou trocar.</p>
     </div>
 
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <form action="cadastro-produto.php" method="POST" enctype="multipart/form-data">
         <div class="flex gap-32 align-start">
             <div class="flex-2 min-w-0">
                 <div class="form-card">
@@ -45,10 +179,18 @@
                             <label for="categoria">Categoria *</label>
                             <select id="categoria" name="categoria" required>
                                 <option value="">Selecione...</option>
-                                <option value="jalecos">Jalecos</option>
-                                <option value="uniformes">Uniformes</option>
-                                <option value="livros">Livros</option>
-                                <option value="outros">Outros</option>
+                                <?php
+                                $lista_categorias = listarCategorias($conexao);
+                                $i = 0;
+                                while ($i < sizeof($lista_categorias)) {
+                                    $categoria = $lista_categorias[$i];
+                                    $idcategoria = $categoria["idcategoria"];
+                                    $nome = $categoria["nome"];
+
+                                    echo '<option value="' . $idcategoria . '">'.$nome.'</option>';
+                                    $i++;
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="form-grupo">
@@ -78,7 +220,6 @@
                                 <input type="radio" name="tipo" value="troca"> Troca
                             </label>
                         </div>
-                        <span class="hint">Nota: Sem JavaScript, todos os campos abaixo são exibidos. Preencha apenas o que for relevante para o tipo escolhido.</span>
                     </div>
 
                     <div class="form-grupo" id="campo-preco">
@@ -96,7 +237,7 @@
                     </div>
 
                     <div class="form-grupo" id="campo-troca">
-                        <label for="detalhes-troca">O que deseja em troca? (se troca)</label>
+                        <label for="detalhes-troca">O que deseja em troca? (Ex: notebook ou não faço troca)</label>
                         <textarea id="detalhes-troca" name="detalhes_troca" placeholder="Descreva o que você aceita em troca..." rows="3"></textarea>
                     </div>
                 </div>

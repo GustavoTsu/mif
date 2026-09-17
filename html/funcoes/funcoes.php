@@ -216,36 +216,79 @@ function pesquisarCategoriaNome($conexao, $nome)
 
 
 
-function salvarImagem($conexao, $caminho, $idanuncio)
-{
-    $sql = "INSERT INTO imagem (caminho, idanuncio) VALUES (?, ?)";
-    $comando = mysqli_prepare($conexao, $sql);
+// function salvarImagem($conexao, $caminho, $idanuncio)
+// {
+//     $sql = "INSERT INTO imagem (caminho, idanuncio) VALUES (?, ?)";
+//     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'si', $caminho, $idanuncio);
-    $arquivo = $_FILES['foto']['name'];
+//     mysqli_stmt_bind_param($comando, 'si', $caminho, $idanuncio);
+//     $arquivo = $_FILES['foto']['name'];
+
+//     $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
+//     $permitidas = ['jpg', 'jpeg', 'png'];
+
+//     if(!in_array($extensao, $permitidas)){ 
+//         return false;
+//     }
+
+//     if($arquivo['size']> 1024 * 1024 * 2){ // permite até 2MB
+//         return false;
+//     }
+
+//     $nomeArquivo = uniqid() . "_" . $arquivo['name'];
+//     $caminho = "/fotos" . $nomeArquivo; // uploads/capas/13516516has5_arvore.png
+
+//     if (move_uploaded_file($arquivo['tmp_name'], $caminho)){
+//         $funcionou = mysqli_stmt_execute($comando);
+//         mysqli_stmt_close($comando);
+//         return $caminho;
+            
+//     }
+    
+// };
+
+function salvarImagem($conexao, $arquivo, $idanuncio)
+{
+    if (!isset($arquivo['error'])) {
+        return false;
+    }
+
+    if ($arquivo['error'] !== UPLOAD_ERR_OK) {
+        return false;
+    }
+
+    if ($arquivo['size'] > 2 * 1024 * 1024) {
+        return false;
+    }
 
     $extensao = strtolower(pathinfo($arquivo['name'], PATHINFO_EXTENSION));
-    $permitidas = ['jpg', 'jpeg', 'png'];
+    $permitidas = ['jpg', 'jpeg', 'png', 'webp'];
 
-    if(!in_array($extensao, $permitidas)){ 
+    if (!in_array($extensao, $permitidas)) {
         return false;
     }
 
-    if($arquivo['size']> 1024 * 1024 * 2){ // permite até 2MB
-        return false;
+    $diretorioDestino = __DIR__ . '/../imagens/';
+    $nomeArquivo = uniqid() . '_' . basename($arquivo['name']);
+    $caminhoCompleto = $diretorioDestino . $nomeArquivo;
+
+    if (move_uploaded_file($arquivo['tmp_name'], $caminhoCompleto)) {
+        $sql = "INSERT INTO imagem (caminho, idanuncio) VALUES (?, ?)";
+        $comando = mysqli_prepare($conexao, $sql);
+
+        if ($comando) {
+            mysqli_stmt_bind_param($comando, 'si', $nomeArquivo, $idanuncio);
+            $executou = mysqli_stmt_execute($comando);
+            mysqli_stmt_close($comando);
+
+            if ($executou) {
+                return $nomeArquivo;
+            }
+        }
     }
 
-    $nomeArquivo = uniqid() . "_" . $arquivo['name'];
-    $caminho = "/fotos" . $nomeArquivo; // uploads/capas/13516516has5_arvore.png
-
-    if (move_uploaded_file($arquivo['tmp_name'], $caminho)){
-        $funcionou = mysqli_stmt_execute($comando);
-        mysqli_stmt_close($comando);
-        return $caminho;
-            
-    }
-    
-};
+    return false;
+}
 
 function deletarImagem($conexao, $idimagem)
 {
@@ -477,7 +520,7 @@ function pesquisarAnuncioId($conexao, $idanuncio)
 
 function pesquisarAnuncioNome($conexao, $nome)
 {
-    $sql = "SELECT * FROM anuncio WHERE nome LIKE ?";
+    $sql = "SELECT * FROM anuncio WHERE titulo LIKE ?";
     $stmt = mysqli_prepare($conexao, $sql);
     $nomeBusca = '%' . $nome . '%';
     $stmt->bind_param("s", $nomeBusca);
@@ -559,7 +602,7 @@ while ($i <= $numero_pg) {
     
 
     echo "
-                    <a href='produto/produto.php?id=". $id ."' class='card-produto'>
+                    <a href='/produto/produto.php?id=". $id ."' class='card-produto'>
                         <div class='foto-placeholder'><img src='/imagens/" . $imagem . "' alt='sem imagem'></div>
                         <div class='info-card'>
                             <span class='tipo-badge badge-venda'>".$tipo."</span>

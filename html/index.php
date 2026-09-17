@@ -3,7 +3,18 @@ session_start();
 require_once "funcoes/funcoes.php";
 verificarLogin();
 
-$anuncios = listarAnuncios($conexao);
+
+
+if (isset($_GET["busca"])) {
+    $busca = $_GET["busca"];
+    $anuncios = pesquisarAnuncioNome($conexao, $busca);
+
+// } elseif (isset($_GET["cateforia"])) {
+//     $anuncios = pesquisarAnuncioCategoria($conexao, $categoria);
+} else {
+    $busca = "";
+    $anuncios = listarAnuncios($conexao);
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,10 +30,10 @@ $anuncios = listarAnuncios($conexao);
 
 <header>
     <a href="index.php" class="logo">M<span>IF</span></a>
-    <div class="barra-busca">
-        <input type="text" placeholder="Buscar produtos">
-        <button type="button">Buscar</button>
-    </div>
+    <form id="formbusca" class="barra-busca" action="/index.php" method="GET">
+        <input id="busca" name="busca" type="text" placeholder="Buscar produtos" value="<?php echo $busca; ?>">
+        <button type="submit">Buscar</button>
+    </form>
     <nav>
         <a href="produto/produto/cadastro-produto.php" class="btn-anunciar">+ Anunciar</a>
     </nav>
