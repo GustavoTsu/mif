@@ -35,7 +35,7 @@ if (isset($_GET["busca"])) {
         <button type="submit">Buscar</button>
     </form>
     <nav>
-        <a href="produto/produto/cadastro-produto.php" class="btn-anunciar">+ Anunciar</a>
+        <a href="produto/cadastro-produto.php" class="btn-anunciar">+ Anunciar</a>
     </nav>
 </header>
 

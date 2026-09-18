@@ -96,7 +96,7 @@ $anuncios = filtrarAnuncios($conexao, "id_anunciante", $idusuario);
 
                 <?php
                 if(1 == 1) {
-                echo '<a <p style="margin: 10px 0px;" href="../usuario/vendedor.php" class="btn btn-outline-vermelho btn-bloco">Encerrar</a>  ';
+                echo '<a <p style="margin: 10px 0px;" href="deletar.php?idanuncio=' . $id . '" class="btn btn-outline-vermelho btn-bloco">Encerrar</a>  ';
                 } else {
                     echo "<p style='color:red;'>botão encerrar caso vc seja dono do anúncio</p>";
                 }

@@ -481,6 +481,12 @@ function listarAnuncios($conexao)
 
 function deletarAnuncio($conexao, $idanuncio)
 {
+    $sqlImg = "DELETE FROM imagem WHERE idanuncio = ?";
+    $comandoImg = mysqli_prepare($conexao, $sqlImg);
+    mysqli_stmt_bind_param($comandoImg, 'i', $idanuncio);
+    mysqli_stmt_execute($comandoImg);
+    mysqli_stmt_close($comandoImg);
+
     $sql = "DELETE FROM anuncio WHERE idanuncio = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
