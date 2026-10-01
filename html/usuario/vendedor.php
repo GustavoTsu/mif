@@ -2,6 +2,22 @@
 session_start();
 require_once "../funcoes/funcoes.php";
 verificarLogin();
+
+
+
+$id_usuario = 1;
+if (isset($_GET["id"])) {
+    $id_usuario = $_GET["id"];
+}
+$anuncios = filtrarAnuncios($conexao, "id_anunciante", $id_usuario);
+
+$usuario = pesquisarUsuarioId($conexao, $id_usuario) ?? pesquisarAnuncioId($conexao, 1);
+
+
+$id = $usuario['idusuario'];
+$nome = $usuario['nome'];
+$numero = $usuario['numero'];
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -28,31 +44,50 @@ verificarLogin();
     
 
     <div class="perfil-vendedor-topo">
-        <div class="avatar-grande">J</div>
+        <div class="avatar-grande"><?php echo $nome[0]; ?></div>
         <div class="dados-vendedor flex-1">
-            <h1>João Silva</h1>
+            <h1><?php echo $nome; ?></h1>
            
             <div class="stats">
                 <div class="stat-item">
-                    <div class="stat-numero">3</div>
-                    <div class="stat-label">Anúncios ativos</div>
+                    <div class="stat-numero"><?php echo sizeof($anuncios); ?></div>
+                    <div class="stat-label">Anúncios</div>
                 </div>
             </div>
         </div>
 
         <div class="flex flex-column gap-10 align-end">
-            <div class="text-xsmall text-cinza text-right">WhatsApp: (64) 99999-9999</div>
+            <div class="text-big text-verde text-right">Contato: <?php echo $numero; ?></div>
         </div>
     </div>
 
     <!-- ABAS QUE CONTROLAM O IFRAME -->
     <div class="tabs-iframe">
-        <a href="vendedor-anuncios.php" target="vendedor-iframe" class="tab-item">Anúncios <span class="badge-count">3</span></a>
+        <span class="tab-item">Anúncios<span class="badge-count"><?php echo sizeof($anuncios); ?></span></span>
     </div>
 
     <!-- IFRAME CENTRALIZADO -->
-    <iframe name="vendedor-iframe" src="vendedor-anuncios.php" class="iframe-container" style="height: 600px;"></iframe>
+<div class="iframe-body" style="background: #fff; padding: 20px;">
+        <div class="area-resultados">
+            <div class="mt-24 text-center">
+                <?php
+                    barraNavegacao($anuncios)
+                ?>
+            </div>
 
+            <div class="grid-produtos">
+                <?php
+                    Anunciosformatados($conexao, $anuncios)
+                ?>
+            </div>
+
+            <div class="mt-24 text-center">
+                <?php
+                    barraNavegacao($anuncios)
+                ?>
+            </div>
+        </div>
+</div>
 </div>
 
 <footer>

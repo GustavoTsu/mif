@@ -3,10 +3,11 @@ session_start();
 require_once "../funcoes/funcoes.php";
 verificarLogin();
 
+$id_anuncio = 1;
+if (isset($_GET["id"])) {
+    $id_anuncio = $_GET["id"];
+}
 
-
-$tipo = "id_vendedor";
-$id_anuncio = $_GET["id"];
 
 $anuncio = pesquisarAnuncioId($conexao, $id_anuncio) ?? pesquisarAnuncioId($conexao, 1);
 
