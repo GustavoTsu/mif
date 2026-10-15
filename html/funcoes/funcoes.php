@@ -42,7 +42,7 @@ function deletarUsuario($conexao, $idusuario)
     mysqli_stmt_close($comando);
 
     return $funcionou; //true ou false
-} //testado e averiguado 100% pelo Sun
+} //testado e averiguado 100% pelo Pedro
 
 function editarUsuario($conexao, $nome, $email, $numero, $matricula , $idusuario)
 {
@@ -498,15 +498,15 @@ function deletarAnuncio($conexao, $idanuncio)
     return $funcionou; //true ou false
 };
 
-function editarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario)
+function editarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idanuncio)
 {
-    $sql = "UPDATE anuncio (titulo, descricao, estado, tipo, preco, periodoaluguel, troca, idcategoria, status, idusuario) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    $sql = "UPDATE anuncio SET titulo=?, descricao=?, estado=?, tipo=?, preco=?, periodoaluguel=?, troca=?, idcategoria=?, status=? WHERE idanuncio=?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'ssssdssisi', $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario);
+    mysqli_stmt_bind_param($comando, 'ssssdssisi', $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idanuncio);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
-};
+}
 
 function pesquisarAnuncioId($conexao, $idanuncio)
 {
