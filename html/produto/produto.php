@@ -115,7 +115,7 @@ $anuncios = filtrarAnuncios($conexao, "id_anunciante", $idusuario);
                     <a href="../usuario/vendedor.php" class="btn btn-outline btn-bloco">Ver perfil do vendedor</a>
 
                     <?php if ($podeGerenciar) { ?>
-                        <a style="margin: 10px 0px;" href="editar-produto.php?idanuncio=<?php echo $id; ?>" class="btn btn-outline btn-bloco">Editar</a>
+                        <a style="margin: 10px 0px;" href="cadastro-produto.php?idanuncio=<?php echo $id; ?>" class="btn btn-outline btn-bloco">Editar</a>
                         <a href="deletar.php?idanuncio=<?php echo $id; ?>" class="btn btn-outline-vermelho btn-bloco">Encerrar</a>
                     <?php } ?>
                 </div>
