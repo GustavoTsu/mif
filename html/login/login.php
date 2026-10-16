@@ -12,9 +12,7 @@
 
     <header>
         <a href="index.php" class="logo">M<span>IF</span></a>
-        <nav>
-            <a href="index.php">Voltar ao início</a>
-        </nav>
+
     </header>
 
     <div class="container">

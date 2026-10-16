@@ -29,14 +29,14 @@ if (isset($_GET["busca"])) {
 <body>
 
 <header>
-    <a href="index.php" class="logo">M<span>IF</span></a>
+    <a href="./../index.php" class="logo">M<span>IF</span></a>
     <form id="formbusca" class="barra-busca" action="/index.php" method="GET">
         <input id="busca" name="busca" type="text" placeholder="Buscar produtos" value="<?php echo $busca; ?>">
         <button type="submit">Buscar</button>
     </form>
     <nav>
         <a href="produto/cadastro-produto.php" class="btn-anunciar">+ Anunciar</a>
-        <a href="" class="btn-anunciar">Sair</a>
+        <a href="logout.php" class="btn-anunciar">Sair</a>
     </nav>
 </header>
 
