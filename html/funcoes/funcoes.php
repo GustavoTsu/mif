@@ -462,22 +462,6 @@ function salvarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $p
     return $funcionou;
 };
 
-function listarAnuncios($conexao)
-{
-    $sql = "SELECT * FROM anuncio";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
-
-    $lista_anuncios = [];
-    while ($anuncio = mysqli_fetch_assoc($resultado)) {
-        $lista_anuncios[] = $anuncio;
-    }
-
-    mysqli_stmt_close($comando);
-    return $lista_anuncios;
-};
 
 function deletarAnuncio($conexao, $idanuncio)
 {
