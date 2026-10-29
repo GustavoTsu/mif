@@ -525,7 +525,116 @@ function pesquisarAnuncioNome($conexao, $nome)
     return $lista;
     }
 
+function listarAnuncios($conexao, $filtro = [])
+{
+    if (!is_array($filtro)) {
+        $filtro = [];
+    }
 
+    $condicoes = [];
+    $parametros = [];
+    $tipos = "";
+
+    // TIPO (venda, aluguel, troca)
+    if (!empty($filtro["filtro_tipo"])) {
+        $condicoes[] = "tipo = ?";   // <- troque pelo nome real da coluna
+        $parametros[] = $filtro["filtro_tipo"];
+        $tipos .= "s";
+    }
+
+    // CATEGORIA
+    if (!empty($filtro["filtro_categoria"])) {
+        $condicoes[] = "idcategoria = ?";
+        $parametros[] = (int) $filtro["filtro_categoria"];
+        $tipos .= "i";
+    }
+
+    // USUÁRIO
+    if (!empty($filtro["filtro_idusuario"])) {
+        $condicoes[] = "idusuario = ?";
+        $parametros[] = (int) $filtro["filtro_idusuario"];
+        $tipos .= "i";
+    }
+
+    // PREÇO MÍNIMO
+    if (isset($filtro["filtro_preco_min"]) && $filtro["filtro_preco_min"] !== "") {
+        $condicoes[] = "preco >= ?";
+        $parametros[] = (float) $filtro["filtro_preco_min"];
+        $tipos .= "d";
+    }
+
+    // PREÇO MÁXIMO
+    if (isset($filtro["filtro_preco_max"]) && $filtro["filtro_preco_max"] !== "") {
+        $condicoes[] = "preco <= ?";
+        $parametros[] = (float) $filtro["filtro_preco_max"];
+        $tipos .= "d";
+    }
+
+    // ESTADO DO ITEM (array de checkboxes -> IN)
+    if (!empty($filtro["filtro_estado"]) && is_array($filtro["filtro_estado"])) {
+        $marcadores = implode(",", array_fill(0, count($filtro["filtro_estado"]), "?"));
+        $condicoes[] = "estado IN ($marcadores)";
+        foreach ($filtro["filtro_estado"] as $estado) {
+            $parametros[] = $estado;
+            $tipos .= "s";
+        }
+    }
+
+    // ORDENAÇÃO (padrão: mais recentes)
+    $ordenacao = " ORDER BY datahora DESC";
+
+    if (isset($filtro["filtro_ordenar"])) {
+        switch ($filtro["filtro_ordenar"]) {
+            case "preco_asc":
+                $ordenacao = " ORDER BY preco ASC";
+                break;
+            case "preco_desc":
+                $ordenacao = " ORDER BY preco DESC";
+                break;
+            case "avaliacao":
+                $ordenacao = " ORDER BY avaliacao DESC";
+                break;
+        }
+    }
+
+    // MONTAGEM DO SQL
+    $sql = "SELECT * FROM anuncio";
+
+    if (!empty($condicoes)) {
+        $sql .= " WHERE " . implode(" AND ", $condicoes);
+    }
+
+    $sql .= $ordenacao;
+
+    // PREPARAR, VINCULAR E EXECUTAR
+    $comando = mysqli_prepare($conexao, $sql);
+
+    if (!$comando) {
+        return [];
+    }
+
+    if (!empty($parametros)) {
+        mysqli_stmt_bind_param($comando, $tipos, ...$parametros);
+    }
+
+    if (!mysqli_stmt_execute($comando)) {
+        mysqli_stmt_close($comando);
+        return [];
+    }
+
+    $resultado = mysqli_stmt_get_result($comando);
+
+    // MONTAR A LISTA
+    $lista_anuncios = [];
+
+    while ($anuncio = mysqli_fetch_assoc($resultado)) {
+        $lista_anuncios[] = $anuncio;
+    }
+
+    mysqli_stmt_close($comando);
+
+    return $lista_anuncios;
+}
 
 function filtrarAnuncios($conexao, $filtragem, $filtro) {
     if (!in_array($filtragem, ["tipo", "categoria", "id_anunciante", "preco"])) {
