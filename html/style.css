@@ -612,7 +612,7 @@ header .btn-anunciar:hover {
     width: 100%;
     height: 340px;
     background-color: #e0e0e0;
-    border-radius: 6px;
+
     object-fit: cover;
     border: 1px solid var(--cinza-borda);
 }
@@ -626,7 +626,7 @@ header .btn-anunciar:hover {
     justify-content: center;
     align-items: center;
     background-color: #e0e0e0;
-    border-radius: 6px;
+
     border: 1px solid var(--cinza-borda);
     color: var(--cinza-texto);
     font-size: 0.9rem;
@@ -640,7 +640,6 @@ header .btn-anunciar:hover {
     width: auto;
     height: auto;
     object-fit: contain; /* Garante que a foto APAREÇA INTEIRA sem cortar */
-    border-radius: 6px;
 }
 
 .galeria-produto .miniaturas {
@@ -661,6 +660,24 @@ header .btn-anunciar:hover {
 .galeria-produto .miniatura.ativa {
     border-color: var(--verde);
 }
+
+.seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.esq { left: 8px; }
+.dir { right: 8px; }
 
 /* 
    LAYOUT DE DETALHE DE PRODUTO
@@ -698,6 +715,8 @@ header .btn-anunciar:hover {
     color: var(--cinza-texto);
     margin-bottom: 16px;
     line-height: 1.6;
+    white-space: pre-line !important;
+    overflow-wrap: break-word;
 }
 
 .info-produto .detalhes-tabela {

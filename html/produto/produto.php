@@ -34,9 +34,16 @@ $nome_vendedor = $usuario["nome"];
 $donoAnuncio = ($_SESSION['usuario'] == $usuario['matricula']);
 $podeGerenciar = $donoAnuncio || verificarAdmin();
 
-$imagem = pesquisarImagemAnuncio($conexao, $id);
-$imagem = $imagem["caminho"] ?? "sem imagem";
+$stmt = mysqli_prepare($conexao, "SELECT caminho FROM imagem WHERE idanuncio = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $caminho);
 
+$fotos = [];
+while (mysqli_stmt_fetch($stmt)) {
+    $fotos[] = $caminho;
+}
+mysqli_stmt_close($stmt);
 
 $anuncios = filtrarAnuncios($conexao, "id_anunciante", $idusuario);
 
@@ -70,13 +77,39 @@ $anuncios = filtrarAnuncios($conexao, "id_anunciante", $idusuario);
         <div class="layout-produto">
             <div class="coluna-fotos">
                 <div class="galeria-produto">
-                    <div class="foto-placeholder-grande"><?php echo "<img src='/imagens/" . $imagem . "' alt='sem imagem'>"; ?></div>
-                    <div class="miniaturas">
-                        <div class="miniatura ativa flex align-center justify-center text-xsmall text-cinza">1</div>
-                        <div class="miniatura flex align-center justify-center text-xsmall text-cinza">2</div>
-                        <div class="miniatura flex align-center justify-center text-xsmall text-cinza">3</div>
+                    <div class="foto-placeholder-grande" style="position: relative;">
+                        <button class="seta esq" onclick="voltar()">&#10094;</button>
+                        <img id="foto" src="/imagens/<?php echo $fotos[0] ?? ''; ?>">
+                        <button class="seta dir" onclick="avancar()">&#10095;</button>
                     </div>
+
                 </div>
+
+
+                <script>
+                    var fotos = <?php echo json_encode($fotos); ?>;
+                    var atual = 0;
+
+                    function mostrar() {
+                        document.getElementById("foto").src = "/imagens/" + fotos[atual];
+                    }
+
+                    function avancar() {
+                        atual++;
+                        if (atual >= fotos.length) {
+                            atual = 0;
+                        }
+                        mostrar();
+                    }
+
+                    function voltar() {
+                        atual--;
+                        if (atual < 0) {
+                            atual = fotos.length - 1;
+                        }
+                        mostrar();
+                    }
+                </script>
             </div>
 
             <div class="coluna-info">
@@ -84,11 +117,6 @@ $anuncios = filtrarAnuncios($conexao, "id_anunciante", $idusuario);
                     <span class="tipo-badge badge-venda text-small"><?php echo $tipo; ?></span>
                     <h1 class="mt-8"><?php echo $titulo; ?></h1>
                     <div class="preco-destaque">R$ <?php echo $preco; ?></div>
-                    <p class="descricao">
-                        <?php
-
-                        ?>
-                    </p>
 
                     <table class="detalhes-tabela">
                         <tr>
@@ -111,57 +139,67 @@ $anuncios = filtrarAnuncios($conexao, "id_anunciante", $idusuario);
                             <td>Código do anúncio</td>
                             <td><?php echo $id ?></td>
                         </tr>
+                        <tr>
+                            <td>Contato</td>
+                            <td><?php echo $usuario["numero"]; ?></td>
+                        </tr>
                     </table>
-                    <a href="../usuario/vendedor.php" class="btn btn-outline btn-bloco">Ver perfil do vendedor</a>
 
-                    <?php if ($podeGerenciar) { ?>
-                        <a style="margin: 10px 0px;" href="cadastro-produto.php?idanuncio=<?php echo $id; ?>" class="btn btn-outline btn-bloco">Editar</a>
-                        <a href="deletar.php?idanuncio=<?php echo $id; ?>" class="btn btn-outline-vermelho btn-bloco">Encerrar</a>
-                    <?php } ?>
                 </div>
             </div>
         </div>
+        <a href="../usuario/vendedor.php" class="btn btn-outline btn-bloco">Ver perfil do vendedor</a>
 
-        <hr class="divider">
-        <h2 class="secao-titulo">Sobre o vendedor</h2>
+        <?php if ($podeGerenciar) { ?>
+            <a style="margin: 10px 0px;" href="cadastro-produto.php?idanuncio=<?php echo $id; ?>" class="btn btn-outline btn-bloco">Editar</a>
+            <a href="deletar.php?idanuncio=<?php echo $id; ?>" class="btn btn-outline-vermelho btn-bloco">Encerrar</a>
+        <?php } ?>
+        <br>
+        <h2 class="mt-8">Descrição</h1>
+            <p class="card-vendedor-resumo descricao" style="white-space: pre-line;">
+                <?php echo htmlspecialchars($descricao); ?>
+            </p>
 
-        <div class="card-vendedor-resumo">
-            <div class="avatar-placeholder"><?php echo $nome_vendedor[0] ?></div>
-            <div>
-                <div class="nome-vendedor">
-                    <a href="../usuario/vendedor.php"><?php echo $nome_vendedor ?></a>
+            <hr class="divider">
+            <h2 class="secao-titulo">Sobre o vendedor</h2>
+
+            <div class="card-vendedor-resumo">
+                <div class="avatar-placeholder"><?php echo $nome_vendedor[0] ?></div>
+                <div>
+                    <div class="nome-vendedor">
+                        <a href="../usuario/vendedor.php"><?php echo $nome_vendedor ?></a>
+                    </div>
+                </div>
+                <div class="ml-auto">
+                    <a href="../usuario/vendedor.php" class="btn btn-outline">Ver perfil</a>
                 </div>
             </div>
-            <div class="ml-auto">
-                <a href="../usuario/vendedor.php" class="btn btn-outline">Ver perfil</a>
-            </div>
-        </div>
 
-        <hr class="divider">
-        <h2 class="secao-titulo">Mais anúncios deste vendedor</h2>
-        <div class="area-resultados">
-            <div class="mt-24 text-center">
-                <?php
-                barraNavegacao($anuncios)
-                ?>
+            <hr class="divider">
+            <h2 class="secao-titulo">Mais anúncios deste vendedor</h2>
+            <div class="area-resultados">
+                <div class="mt-24 text-center">
+                    <?php
+                    barraNavegacao($anuncios)
+                    ?>
+                </div>
+
+                <div class="grid-produtos">
+                    <?php
+                    Anunciosformatados($conexao, $anuncios)
+                    ?>
+                </div>
+
+                <div class="mt-24 text-center">
+                    <?php
+                    barraNavegacao($anuncios)
+                    ?>
+                </div>
             </div>
 
-            <div class="grid-produtos">
-                <?php
-                Anunciosformatados($conexao, $anuncios)
-                ?>
-            </div>
-
-            <div class="mt-24 text-center">
-                <?php
-                barraNavegacao($anuncios)
-                ?>
-            </div>
-        </div>
-
-        <footer>
-            <p>MIF &mdash; Marketplace do Instituto Federal Goiano &copy; 2026</p>
-        </footer>
+            <footer>
+                <p>MIF &mdash; Marketplace do Instituto Federal Goiano &copy; 2026</p>
+            </footer>
 
 </body>
 
