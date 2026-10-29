@@ -462,22 +462,6 @@ function salvarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $p
     return $funcionou;
 };
 
-function listarAnuncios($conexao)
-{
-    $sql = "SELECT * FROM anuncio";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
-
-    $lista_anuncios = [];
-    while ($anuncio = mysqli_fetch_assoc($resultado)) {
-        $lista_anuncios[] = $anuncio;
-    }
-
-    mysqli_stmt_close($comando);
-    return $lista_anuncios;
-};
 
 function deletarAnuncio($conexao, $idanuncio)
 {
@@ -497,6 +481,114 @@ function deletarAnuncio($conexao, $idanuncio)
 
     return $funcionou; //true ou false
 };
+
+function listarAnuncios($conexao, $filtro = [])
+{
+    if (!is_array($filtro)) {
+        $filtro = [];
+    }
+
+    $condicoes = [];
+    $parametros = [];
+    $tipos = "";
+
+    // TIPO
+    if (!empty($filtro["filtro_tipo"])) {
+        $condicoes[] = "tipo = ?";
+        $parametros[] = $filtro["filtro_tipo"];
+        $tipos .= "s";
+    }
+
+    // CATEGORIA (ajuste conforme seu banco, veja nota abaixo)
+    if (!empty($filtro["filtro_categoria"])) {
+        $condicoes[] = "idcategoria = ?";
+        $parametros[] = (int) $filtro["filtro_categoria"];
+        $tipos .= "i";
+    }
+
+    // USUÁRIO
+    if (!empty($filtro["filtro_idusuario"])) {
+        $condicoes[] = "idusuario = ?";
+        $parametros[] = (int) $filtro["filtro_idusuario"];
+        $tipos .= "i";
+    }
+
+    // PREÇO MÍNIMO
+    if (isset($filtro["filtro_preco_min"]) && $filtro["filtro_preco_min"] !== "") {
+        $condicoes[] = "preco >= ?";
+        $parametros[] = (float) $filtro["filtro_preco_min"];
+        $tipos .= "d";
+    }
+
+    // PREÇO MÁXIMO
+    if (isset($filtro["filtro_preco_max"]) && $filtro["filtro_preco_max"] !== "") {
+        $condicoes[] = "preco <= ?";
+        $parametros[] = (float) $filtro["filtro_preco_max"];
+        $tipos .= "d";
+    }
+
+    // ESTADO (array -> IN)
+    if (!empty($filtro["filtro_estado"]) && is_array($filtro["filtro_estado"])) {
+        $marcadores = implode(",", array_fill(0, count($filtro["filtro_estado"]), "?"));
+        $condicoes[] = "estado IN ($marcadores)";
+        foreach ($filtro["filtro_estado"] as $estado) {
+            $parametros[] = $estado;
+            $tipos .= "s";
+        }
+    }
+
+    // ORDENAÇÃO (padrão: mais recentes)
+    $ordenacao = " ORDER BY datahora DESC";
+
+    if (isset($filtro["filtro_ordenar"])) {
+        switch ($filtro["filtro_ordenar"]) {
+            case "preco_asc":
+                $ordenacao = " ORDER BY preco ASC";
+                break;
+            case "preco_desc":
+                $ordenacao = " ORDER BY preco DESC";
+                break;
+            case "avaliacao":
+                $ordenacao = " ORDER BY avaliacao DESC";
+                break;
+        }
+    }
+
+    $sql = "SELECT * FROM anuncio";
+
+    if (!empty($condicoes)) {
+        $sql .= " WHERE " . implode(" AND ", $condicoes);
+    }
+
+    $sql .= $ordenacao;
+
+    $comando = mysqli_prepare($conexao, $sql);
+
+    if (!$comando) {
+        return [];
+    }
+
+    if (!empty($parametros)) {
+        mysqli_stmt_bind_param($comando, $tipos, ...$parametros);
+    }
+
+    if (!mysqli_stmt_execute($comando)) {
+        mysqli_stmt_close($comando);
+        return [];
+    }
+
+    $resultado = mysqli_stmt_get_result($comando);
+
+    $lista_anuncios = [];
+    while ($anuncio = mysqli_fetch_assoc($resultado)) {
+        $lista_anuncios[] = $anuncio;
+    }
+
+    mysqli_stmt_close($comando);
+
+    return $lista_anuncios;
+}
+
 
 function editarAnuncio($conexao, $titulo, $descricao, $estado, $tipo, $preco, $periodoaluguel, $troca, $idcategoria, $status, $idusuario)
 {
