@@ -148,7 +148,7 @@ $anuncios = filtrarAnuncios($conexao, "id_anunciante", $idusuario);
                 </div>
             </div>
         </div>
-        <a href="../usuario/vendedor.php" class="btn btn-outline btn-bloco">Ver perfil do vendedor</a>
+        <a href="../usuario/vendedor.php?id=<?php echo $idusuario ?>" class="btn btn-outline btn-bloco">Ver perfil do vendedor</a>
 
         <?php if ($podeGerenciar) { ?>
             <a style="margin: 10px 0px;" href="cadastro-produto.php?idanuncio=<?php echo $id; ?>" class="btn btn-outline btn-bloco">Editar</a>
@@ -167,11 +167,11 @@ $anuncios = filtrarAnuncios($conexao, "id_anunciante", $idusuario);
                 <div class="avatar-placeholder"><?php echo $nome_vendedor[0] ?></div>
                 <div>
                     <div class="nome-vendedor">
-                        <a href="../usuario/vendedor.php"><?php echo $nome_vendedor ?></a>
+                        <a href="../usuario/vendedor.php?id=<?php echo $idusuario ?>"><?php echo $nome_vendedor ?></a>
                     </div>
                 </div>
                 <div class="ml-auto">
-                    <a href="../usuario/vendedor.php" class="btn btn-outline">Ver perfil</a>
+                    <a href="../usuario/vendedor.php?id=<?php echo $idusuario ?>" class="btn btn-outline">Ver perfil</a>
                 </div>
             </div>
 
